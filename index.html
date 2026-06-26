@@ -3,15 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>📚 Vanessa – Maturita z češtiny</title>
+<title>Vanessa - Maturita z cestiny</title>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 <style>
 :root{--pd:#3d1a78;--pm:#6c35be;--pl:#9b6de8;--pp:#c8a8f5;--pbg:#f3ebff;--pink:#e879c0;--gold:#ffd700;--card:rgba(255,255,255,0.93);--shadow:0 8px 32px rgba(108,53,190,0.18);--r:20px}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Nunito',sans-serif;background:linear-gradient(135deg,#1a0533 0%,#2d0a5e 40%,#1a0a3d 100%);min-height:100vh;color:#1a0a3d;overflow-x:hidden}
-.stars{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden}
-.star{position:absolute;border-radius:50%;background:white;animation:twinkle var(--dur,3s) ease-in-out infinite;animation-delay:var(--delay,0s);opacity:0}
-@keyframes twinkle{0%,100%{opacity:0;transform:scale(.5)}50%{opacity:var(--mo,.8);transform:scale(1)}}
+body{font-family:'Nunito',sans-serif;background:#0d0020;min-height:100vh;color:#1a0a3d;overflow-x:hidden}
+canvas#sf{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0}
 .container{position:relative;z-index:1;max-width:900px;margin:0 auto;padding:20px 16px 60px}
 .hero{text-align:center;padding:50px 20px 40px}
 .hero-emoji{font-size:64px;margin-bottom:12px;display:block;animation:float 3s ease-in-out infinite}
@@ -25,23 +23,20 @@ body{font-family:'Nunito',sans-serif;background:linear-gradient(135deg,#1a0533 0
 .progress-count{color:white;font-size:.9rem;font-weight:700}
 .era{margin-bottom:40px}
 .era-header{display:flex;align-items:center;gap:14px;padding:16px 24px;background:linear-gradient(135deg,rgba(108,53,190,.6),rgba(200,168,245,.15));border-radius:16px;margin-bottom:16px;border:1px solid rgba(200,168,245,.3);backdrop-filter:blur(10px)}
-.era-emoji{font-size:32px}
-.era-title{font-family:'Playfair Display',serif;color:white;font-size:1.2rem}
+.era-emoji{font-size:32px}.era-title{font-family:'Playfair Display',serif;color:white;font-size:1.2rem}
 .era-count{margin-left:auto;background:rgba(255,255,255,.15);color:var(--pp);border-radius:50px;padding:4px 14px;font-size:.8rem;font-weight:700}
 .book-card{background:var(--card);border-radius:var(--r);margin-bottom:14px;box-shadow:var(--shadow);border:2px solid transparent;transition:all .3s;overflow:hidden}
 .book-card.learned{border-color:#7ed957;box-shadow:0 8px 32px rgba(126,217,87,.2)}
 .book-card.learned .book-header{background:linear-gradient(135deg,#f0fff4,#e8f5e9)}
 .book-header{display:flex;align-items:center;gap:14px;padding:18px 20px;cursor:pointer;user-select:none;background:linear-gradient(135deg,var(--pbg),#fff);transition:background .3s}
 .book-header:hover{background:linear-gradient(135deg,#ead8ff,#f9f4ff)}
-.book-icon{font-size:28px;flex-shrink:0}
-.book-info{flex:1;min-width:0}
+.book-icon{font-size:28px;flex-shrink:0}.book-info{flex:1;min-width:0}
 .book-title{font-size:1rem;font-weight:800;color:var(--pd);line-height:1.3}
 .book-author{font-size:.82rem;color:var(--pm);font-weight:600;margin-top:2px}
 .book-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
 .tag{font-size:.7rem;font-weight:700;padding:2px 8px;border-radius:50px;background:rgba(108,53,190,.1);color:var(--pm)}
 .learn-btn{flex-shrink:0;width:38px;height:38px;border-radius:50%;border:2px solid var(--pl);background:white;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .3s}
-.learn-btn:hover{transform:scale(1.1)}
-.learn-btn.active{background:#7ed957;border-color:#5cb83a}
+.learn-btn:hover{transform:scale(1.1)}.learn-btn.active{background:#7ed957;border-color:#5cb83a}
 .chevron{font-size:14px;color:var(--pl);transition:transform .3s;flex-shrink:0;margin-left:4px}
 .book-card.open .chevron{transform:rotate(180deg)}
 .book-content{display:none;padding:0 20px 20px;border-top:1px solid rgba(108,53,190,.1)}
@@ -52,15 +47,15 @@ body{font-family:'Nunito',sans-serif;background:linear-gradient(135deg,#1a0533 0
 .content-box.fw{grid-column:1/-1}
 .content-box h3{font-size:.8rem;font-weight:800;text-transform:uppercase;letter-spacing:.5px;color:var(--pm);margin-bottom:8px}
 .content-box p,.content-box li{font-size:.88rem;color:#1a0a3d;line-height:1.6}
-.content-box ul{padding-left:16px}
-.content-box li{margin-bottom:4px}
-.mb{background:linear-gradient(135deg,#fff9e6,#fff3cc);border-left-color:var(--gold)}
-.mb h3{color:#8b6914}
-.qb{background:linear-gradient(135deg,#fdf0ff,#f5e6ff);border-left-color:var(--pink);grid-column:1/-1;font-style:italic;font-size:.9rem;color:var(--pm)}
-.qb h3{color:var(--pink);font-style:normal}
-.rb{background:linear-gradient(135deg,#e8f8e8,#f0fff0);border-left-color:#7ed957;grid-column:1/-1}
-.rb h3{color:#2d7a1a}
-.rb li{font-weight:600}
+.content-box ul{padding-left:16px}.content-box li{margin-bottom:4px}
+.mb{background:linear-gradient(135deg,#fff9e6,#fff3cc);border-left-color:var(--gold)}.mb h3{color:#8b6914}
+.qb{background:linear-gradient(135deg,#fdf0ff,#f5e6ff);border-left-color:var(--pink);grid-column:1/-1;font-style:italic;font-size:.9rem;color:var(--pm)}.qb h3{color:var(--pink);font-style:normal}
+.rb{background:linear-gradient(135deg,#e8f8e8,#f0fff0);border-left-color:#7ed957;grid-column:1/-1}.rb h3{color:#2d7a1a}.rb li{font-weight:600}
+.lt{background:linear-gradient(135deg,#e8f0ff,#ddeaff);border-left-color:#4466cc;grid-column:1/-1}.lt h3{color:#1a3a8a}
+.lt-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:8px;margin-top:8px}
+.lt-item{background:rgba(68,102,204,.1);border-radius:10px;padding:8px 10px}
+.lt-item strong{display:block;font-size:.72rem;color:#1a3a8a;text-transform:uppercase;letter-spacing:.4px;margin-bottom:2px}
+.lt-item span{font-size:.82rem;color:#0d1f5a;font-weight:600}
 .quiz-btn{display:inline-flex;align-items:center;gap:8px;margin-top:16px;padding:10px 20px;background:linear-gradient(135deg,var(--pm),var(--pl));color:white;border:none;border-radius:50px;font-family:'Nunito',sans-serif;font-size:.88rem;font-weight:700;cursor:pointer;transition:all .3s;box-shadow:0 4px 16px rgba(108,53,190,.3)}
 .quiz-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(108,53,190,.4)}
 .quiz-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(20,5,50,.85);z-index:1000;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(8px)}
@@ -68,9 +63,9 @@ body{font-family:'Nunito',sans-serif;background:linear-gradient(135deg,#1a0533 0
 .quiz-modal{background:white;border-radius:24px;padding:32px;max-width:520px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.4);animation:popIn .3s ease}
 @keyframes popIn{from{transform:scale(.85);opacity:0}to{transform:scale(1);opacity:1}}
 .quiz-book-name{font-size:.8rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--pl);margin-bottom:12px}
-.quiz-question{font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--pd);margin-bottom:20px;line-height:1.5}
+.quiz-question{font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--pd);margin-bottom:20px;line-height:1.5}
 .quiz-options{display:flex;flex-direction:column;gap:10px}
-.quiz-option{padding:12px 18px;border:2px solid #e0d0f5;border-radius:12px;cursor:pointer;font-family:'Nunito',sans-serif;font-size:.9rem;font-weight:600;color:#1a0a3d;background:white;text-align:left;transition:all .2s}
+.quiz-option{padding:12px 18px;border:2px solid #e0d0f5;border-radius:12px;cursor:pointer;font-family:'Nunito',sans-serif;font-size:.88rem;font-weight:600;color:#1a0a3d;background:white;text-align:left;transition:all .2s}
 .quiz-option:hover:not(.disabled){border-color:var(--pl);background:#f5eeff}
 .quiz-option.correct{background:#e8f8e8;border-color:#7ed957;color:#1a5c0a}
 .quiz-option.wrong{background:#ffeded;border-color:#ff6b6b;color:#8c1a1a}
@@ -79,344 +74,328 @@ body{font-family:'Nunito',sans-serif;background:linear-gradient(135deg,#1a0533 0
 .quiz-exp.show{display:block}
 .quiz-actions{display:flex;gap:10px;margin-top:16px}
 .quiz-close,.quiz-next{padding:10px 22px;border-radius:50px;border:none;font-family:'Nunito',sans-serif;font-size:.88rem;font-weight:700;cursor:pointer;transition:all .2s}
-.quiz-close{background:#f0e8ff;color:var(--pm)}
-.quiz-next{background:linear-gradient(135deg,var(--pm),var(--pl));color:white;display:none}
-.quiz-next.show{display:block}
+.quiz-close{background:#f0e8ff;color:var(--pm)}.quiz-next{background:linear-gradient(135deg,var(--pm),var(--pl));color:white;display:none}.quiz-next.show{display:block}
 .scroll-top{position:fixed;bottom:30px;right:20px;width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--pink),var(--pm));border:none;color:white;font-size:20px;cursor:pointer;z-index:100;box-shadow:0 4px 20px rgba(0,0,0,.3);transition:all .3s;display:none}
-.scroll-top.visible{display:flex;align-items:center;justify-content:center}
-.scroll-top:hover{transform:scale(1.1)}
+.scroll-top.visible{display:flex;align-items:center;justify-content:center}.scroll-top:hover{transform:scale(1.1)}
 </style>
 </head>
 <body>
-<div class="stars" id="stars"></div>
+<canvas id="sf"></canvas>
 <div class="container">
 <div class="hero">
-  <span class="hero-emoji">✨</span>
-  <h1>Vanessa – Maturita z češtiny</h1>
-  <div class="hero-sub">Gymnázium Jana Šabršuly · třída 4.A · 2025/2026</div>
+  <span class="hero-emoji">&#10024;</span>
+  <h1>Vanessa &ndash; Maturita z cestiny</h1>
+  <div class="hero-sub">Gymnazium Jana Sabrsuly &middot; trida 4.A &middot; 2025/2026</div>
   <div class="progress-wrap">
-    <div class="progress-label">⭐ Jak na tom jsi?</div>
+    <div class="progress-label">&#11088; Jak na tom jsi?</div>
     <div class="progress-bar-bg"><div class="progress-bar-fill" id="pFill" style="width:0%"></div></div>
-    <div class="progress-count" id="pCount">0 z 20 knih zvládnutých 🚀</div>
+    <div class="progress-count" id="pCount">0 z 20 knih zvladnutych &#128640;</div>
   </div>
-</div>
-
-<div class="era">
-  <div class="era-header"><span class="era-emoji">🏰</span><span class="era-title">Světová a česká literatura do konce 18. století</span><span class="era-count">3 knihy</span></div>
-
+</div><div class="era">
+  <div class="era-header"><span class="era-emoji">&#127984;</span><span class="era-title">Svetova a ceska literatura do konce 18. stoleti</span><span class="era-count">3 knihy</span></div>
   <div class="book-card" id="b0">
     <div class="book-header" onclick="tog(0)">
-      <span class="book-icon">🎭</span>
-      <div class="book-info"><div class="book-title">Sluha dvou pánů</div><div class="book-author">Carlo Goldoni · 1745 · Itálie</div><div class="book-tags"><span class="tag">Divadlo</span><span class="tag">Komedie</span><span class="tag">Klasicismus</span></div></div>
-      <button class="learn-btn" id="lb0" onclick="lrn(event,0)">☆</button><span class="chevron">▼</span>
+      <span class="book-icon">&#127917;</span>
+      <div class="book-info"><div class="book-title">Sluha dvou panu</div><div class="book-author">Carlo Goldoni &middot; 1745 &middot; Italie</div><div class="book-tags"><span class="tag">Divadlo</span><span class="tag">Komedie</span><span class="tag">Klasicismus</span></div></div>
+      <button class="learn-btn" id="lb0" onclick="lrn(event,0)">&#9734;</button><span class="chevron">&#9660;</span>
     </div>
     <div class="book-content"><div class="content-grid">
-      <div class="content-box"><h3>📖 O čem to je?</h3><p>Truffaldino je mazaný sluha, který tajně slouží dvěma pánům najednou — dostane dvojí výplatu i jídlo. Jenže páni se hledají navzájem a on musí uhýbat ze všech stran. Nakonec se vše odhalí, zamilovaní se najdou a Truffaldino vyvázne bez trestu. Rychlá, vtipná komedie plná zmatků.</p></div>
-      <div class="content-box"><h3>🎪 Hlavní postavy</h3><ul><li><strong>Truffaldino</strong> – mazaný sluha, vždy hladový</li><li><strong>Florindo</strong> – první pán</li><li><strong>Beatrice</strong> – druhá „pán" (žena převlečená za muže)</li><li><strong>Smeraldina</strong> – Truffaldinem milovaná dívka</li></ul></div>
-      <div class="content-box fw mb"><h3>🎓 Co říct u maturity?</h3><ul><li><strong>Autor:</strong> Carlo Goldoni, italský dramatik 18. stol., reformoval commedia dell'arte</li><li><strong>Žánr:</strong> Komedie dell'arte – typové postavy: sluha, lakomec, zamilovaní</li><li><strong>Téma:</strong> Lstivost prostého člověka, záměna identity, satira</li><li><strong>Přínos:</strong> Goldoni přidal propracované charaktery místo pouhých masek</li></ul></div>
-      <div class="content-box qb"><h3>💬 Klíčová myšlenka</h3><p>„Sluha je chytřejší než jeho páni." Truffaldino přežívá v systému, kde má méně moci, ale víc rozumu.</p></div>
-      <div class="content-box rb fw"><h3>★ Zapamatuj si</h3><ul><li>Goldoni = italský klasicismus, 18. stol.</li><li>Commedia dell'arte = typové masky, improvizace</li><li>Truffaldino slouží dvěma pánům → vyjde mu to</li><li>Téma: lest, záměna, humor ze zmatků</li></ul></div>
-    </div><button class="quiz-btn" onclick="openQ(0)">🧠 Otestuj se!</button></div>
+      <div class="content-box"><h3>&#128214; O cem to je?</h3><p>Truffaldino je mazany sluha, ktery tajne slouzi dvema panum najednou &mdash; dobi dvoji vyplatu i jidlo. Pani se hledaji navzajem a on musi uhybat ze vsech stran. Nakonec se vse odhali, zamilovani se najdou a Truffaldino vyvazne bez trestu.</p></div>
+      <div class="content-box"><h3>&#127970; Postavy / klic. body</h3><ul><li><strong>Truffaldino</strong> &ndash; mazany sluha, vzdy hladovy</li><li><strong>Florindo</strong> &ndash; prvni pan</li><li><strong>Beatrice</strong> &ndash; druha pan (zena v prestrojeni)</li><li><strong>Smeraldina</strong> &ndash; Truffaldinem milovana divka</li></ul></div>
+      <div class="content-box fw lt"><h3>&#128218; Literarni teorie + dobovy kontext</h3><div class="lt-grid"><div class="lt-item"><strong>Lit. druh/zanr</strong><span>Drama &mdash; komedie (commedia dell'arte)</span></div><div class="lt-item"><strong>Lit. smer</strong><span>Klasicismus (18. stol., Italie)</span></div><div class="lt-item"><strong>Forma</strong><span>Proza, dialogy, 3 dejstvi</span></div><div class="lt-item"><strong>Vypravec</strong><span>Neni &mdash; divadelni hra, jen dialogy</span></div><div class="lt-item"><strong>Dobovy kontext</strong><span>Italie 18. stol. &mdash; osvicenstvi, rozum nad citem. Goldoni reformoval improvizovane divadlo na psane hry s propracovanymi charaktery</span></div><div class="lt-item"><strong>Dalsi dila autora</strong><span>Poprask na lagune, Chytra vdova, Mirandolina</span></div></div></div>
+      <div class="content-box fw mb"><h3>&#127891; Co rict u maturity?</h3><ul><li><strong>Autor:</strong> Carlo Goldoni, italsky klasicismus, reformoval commedia dell'arte &mdash; pridal propracovane charaktery misto pouhych masek</li><li><strong>Zanr:</strong> Komedie dell'arte &mdash; typove postavy, puvodni improvizace</li><li><strong>Klasicismus:</strong> pravidlo tri jednot (misto, cas, dej), vychovny zamer</li><li><strong>Tema:</strong> lstivost prosteho cloveka, zamena identity, satira</li></ul></div>
+      <div class="content-box qb"><h3>&#128172; Klicova myslenka</h3><p>Sluha je chytrejsi nez jeho pani. Truffaldino preziva system, kde ma mene moci, ale vic rozumu.</p></div>
+      <div class="content-box rb fw"><h3>&#9733; Zapamatuj si</h3><ul><li>Goldoni = italsky klasicismus, 18. stol.</li><li>Commedia dell'arte = typove masky, puvodni improvizace</li><li>Truffaldino slouzi dvema panum &rarr; vyjde mu to</li><li>Klasicismus = 3 jednoty (cas/misto/dej), rozum nad citem</li></ul></div>
+    </div><button class="quiz-btn" onclick="openQ(0)">&#129504; Otestuj se!</button></div>
   </div>
-
   <div class="book-card" id="b1">
     <div class="book-header" onclick="tog(1)">
-      <span class="book-icon">💰</span>
-      <div class="book-info"><div class="book-title">Lakomec</div><div class="book-author">Molière · 1668 · Francie</div><div class="book-tags"><span class="tag">Divadlo</span><span class="tag">Komedie</span><span class="tag">Klasicismus</span></div></div>
-      <button class="learn-btn" id="lb1" onclick="lrn(event,1)">☆</button><span class="chevron">▼</span>
+      <span class="book-icon">&#128176;</span>
+      <div class="book-info"><div class="book-title">Lakomec</div><div class="book-author">Moliere &middot; 1668 &middot; Francie</div><div class="book-tags"><span class="tag">Divadlo</span><span class="tag">Komedie</span><span class="tag">Klasicismus</span></div></div>
+      <button class="learn-btn" id="lb1" onclick="lrn(event,1)">&#9734;</button><span class="chevron">&#9660;</span>
     </div>
     <div class="book-content"><div class="content-grid">
-      <div class="content-box"><h3>📖 O čem to je?</h3><p>Harpagon je starý boháč, který miluje peníze víc než vlastní děti. Chce je provdat výhodně pro sebe. Drží jim zkrátka, šetří na každém kroku. Děti se tajně scházejí se svými láskami. Nakonec se vše odhalí — a Harpagon se víc stará o svou ztracenu pokladnici než o rodinu.</p></div>
-      <div class="content-box"><h3>🎭 Hlavní postavy</h3><ul><li><strong>Harpagon</strong> – lakomý otec, posedlý penězi</li><li><strong>Cléante</strong> – syn, zamilovaný do Marianny</li><li><strong>Élise</strong> – dcera, zamilovaná do Valéra</li><li><strong>Maître Jacques</strong> – kuchař i kočí (Harpagon šetří)</li></ul></div>
-      <div class="content-box fw mb"><h3>🎓 Co říct u maturity?</h3><ul><li><strong>Autor:</strong> Molière (Jean-Baptiste Poquelin), francouzský klasicismus 17. stol., psal pro Ludvíka XIV.</li><li><strong>Žánr:</strong> Komedie charakterů – satirizuje jeden rys osobnosti (lakomost)</li><li><strong>Klasicismus:</strong> Pravidlo tří jednot, výchovný záměr, rozum nad citem</li><li><strong>Přínos:</strong> Harpagon = archetyp lakomce v literatuře světa</li></ul></div>
-      <div class="content-box qb"><h3>💬 Slavný výkřik</h3><p>„Zloděj! Zloděj! Vrah!" — Harpagon křičí, když mu zmizí pokladnička. Pro peníze by obětoval vlastní rodinu.</p></div>
-      <div class="content-box rb fw"><h3>★ Zapamatuj si</h3><ul><li>Molière = francouzský klasicismus, psal pro krále Ludvíka XIV.</li><li>Harpagon = symbol lakomosti (gr. harpax = ten kdo uchvacuje)</li><li>Komedie charakterů = celá postava definovaná jednou vadou</li><li>Pravidlo tří jednot = místo, čas, děj</li></ul></div>
-    </div><button class="quiz-btn" onclick="openQ(1)">🧠 Otestuj se!</button></div>
+      <div class="content-box"><h3>&#128214; O cem to je?</h3><p>Harpagon je stary bohac, ktery miluje penize vic nez vlastni deti. Chce je provdat vyhodne pro sebe. Deti se tajne schazejici se svymi laskami. Nakonec se vse odhali &mdash; a Harpagon se vic stara o ztracenou pokladnici nez o rodinu.</p></div>
+      <div class="content-box"><h3>&#127970; Postavy / klic. body</h3><ul><li><strong>Harpagon</strong> &ndash; lakomec, posedly penezi</li><li><strong>Cleante</strong> &ndash; syn, zamilovany do Marianny</li><li><strong>Elise</strong> &ndash; dcera, zamilovana do Valera</li><li><strong>Maitre Jacques</strong> &ndash; kuchar i koci (Harpagon setri)</li></ul></div>
+      <div class="content-box fw lt"><h3>&#128218; Literarni teorie + dobovy kontext</h3><div class="lt-grid"><div class="lt-item"><strong>Lit. druh/zanr</strong><span>Drama &mdash; komedie charakteru</span></div><div class="lt-item"><strong>Lit. smer</strong><span>Klasicismus (17. stol., Francie)</span></div><div class="lt-item"><strong>Forma</strong><span>5 dejstvi, proza, dialogy</span></div><div class="lt-item"><strong>Vypravec</strong><span>Neni &mdash; divadelni hra</span></div><div class="lt-item"><strong>Dobovy kontext</strong><span>Francie Ludvika XIV. &mdash; dvur ve Versailles. Moliere psal pro krale. Klasicismus = rozum, rad, moralka, vychovny zamer</span></div><div class="lt-item"><strong>Dalsi dila autora</strong><span>Tartuffe, Don Juan, Misantrop, Zdravy nemocny</span></div></div></div>
+      <div class="content-box fw mb"><h3>&#127891; Co rict u maturity?</h3><ul><li><strong>Autor:</strong> Moliere = francouzsky klasicismus, psal pro krale Ludvika XIV.</li><li><strong>Zanr:</strong> Komedie charakteru = cela postava definovana jedinou vadou (lakomost)</li><li><strong>Pravidlo tri jednot</strong> = misto, cas, dej &mdash; klasicisticka norma</li><li>Harpagon = svetovy archetyp lakomce (jmeno z rec. harpax = ten kdo uchvacuje)</li></ul></div>
+      <div class="content-box qb"><h3>&#128172; Klicova myslenka</h3><p>Zlodev! Zlodev! Vrah! &mdash; Harpagon krici, kdyz mu zmizi pokladnicka. Pro penize by obetoval vlastni rodinu.</p></div>
+      <div class="content-box rb fw"><h3>&#9733; Zapamatuj si</h3><ul><li>Moliere = francouzsky klasicismus, 17. stol., psal pro Ludvika XIV.</li><li>Harpagon = symbol lakomosti</li><li>Komedie charakteru = postava = jedna vada</li><li>Pravidlo tri jednot = misto, cas, dej</li></ul></div>
+    </div><button class="quiz-btn" onclick="openQ(1)">&#129504; Otestuj se!</button></div>
   </div>
-
   <div class="book-card" id="b2">
     <div class="book-header" onclick="tog(2)">
-      <span class="book-icon">🌹</span>
-      <div class="book-info"><div class="book-title">Romeo a Julie</div><div class="book-author">William Shakespeare · 1595 · Anglie</div><div class="book-tags"><span class="tag">Divadlo</span><span class="tag">Tragédie</span><span class="tag">Renesance</span></div></div>
-      <button class="learn-btn" id="lb2" onclick="lrn(event,2)">☆</button><span class="chevron">▼</span>
+      <span class="book-icon">&#127801;</span>
+      <div class="book-info"><div class="book-title">Romeo a Julie</div><div class="book-author">William Shakespeare &middot; 1595 &middot; Anglie</div><div class="book-tags"><span class="tag">Divadlo</span><span class="tag">Tragedie</span><span class="tag">Renesance</span></div></div>
+      <button class="learn-btn" id="lb2" onclick="lrn(event,2)">&#9734;</button><span class="chevron">&#9660;</span>
     </div>
     <div class="book-content"><div class="content-grid">
-      <div class="content-box"><h3>📖 O čem to je?</h3><p>Romeo (rodina Montague) a Julie (rodina Capulet) se zamilují — ale jejich rodiny se nenávidí. Tajně se vezmou. Romeo zabije Juliiina bratrance a je vyhnán. Julie předstírá smrt. Romeo to zaslechne — v žalu se zabije. Julie se probudí, vidí mrtvého Romea — zabije se taky. Tragédie zaviněná rodičovskou nenávistí.</p></div>
-      <div class="content-box"><h3>🎭 Postavy</h3><ul><li><strong>Romeo</strong> – Montague, impulsivní, zamilovaný</li><li><strong>Julie</strong> – 13letá Capuletka, odvážná</li><li><strong>Friar Laurence</strong> – mnich, oddá je tajně, pokazí plán</li><li><strong>Tybalt</strong> – Juliin bratranec, agresivní</li><li><strong>Mercutio</strong> – Romeův přítel, zemře v souboji</li></ul></div>
-      <div class="content-box fw mb"><h3>🎓 Co říct u maturity?</h3><ul><li><strong>Autor:</strong> William Shakespeare, největší dramatik angličtiny, renesance přelomu 16./17. stol.</li><li><strong>Žánr:</strong> Tragédie — hrdinové zahynou kvůli osudové shodě náhod a vině společnosti</li><li><strong>Téma:</strong> Láska vs. nenávist, rodina vs. svoboda jedince</li><li><strong>Přínos:</strong> Symbol věčné lásky, stovky adaptací (opera, muzikál, film)</li></ul></div>
-      <div class="content-box qb"><h3>💬 Slavná scéna</h3><p>Balkonová scéna: „Romeo, Romeo, proč jsi Romeo?" — Julie se ptá, proč musí nést to nenáviděné jméno, které je dělí.</p></div>
-      <div class="content-box rb fw"><h3>★ Zapamatuj si</h3><ul><li>Shakespeare = renesance, Anglie, přelom 16./17. stol.</li><li>Montague vs. Capulet = dvě nepřátelské rodiny ve Veroně</li><li>Tragédie = oba zemřou kvůli nedorozumění</li><li>Symbol: láska silnější než smrt, ale poražená společností</li></ul></div>
-    </div><button class="quiz-btn" onclick="openQ(2)">🧠 Otestuj se!</button></div>
-  </div>
-</div>
-
-<div class="era">
-  <div class="era-header"><span class="era-emoji">🌸</span><span class="era-title">Světová a česká literatura 19. století</span><span class="era-count">4 knihy</span></div>
-
+      <div class="content-box"><h3>&#128214; O cem to je?</h3><p>Romeo (Montague) a Julie (Capulet) se zamiljou &mdash; ale jejich rodiny se nenavidji. Tajne se vezmou. Romeo zabije Juliina bratrance a je vyhnán. Julie predsira smrt. Romeo to zaslychne &mdash; v zalem se zabije. Julie se probudi, vidi mrtveho Romea &mdash; zabije se taky. Tragedie zavinena rodickou nenavisti.</p></div>
+      <div class="content-box"><h3>&#127970; Postavy / klic. body</h3><ul><li><strong>Romeo</strong> &ndash; Montague, impulzivni, zamilovany</li><li><strong>Julie</strong> &ndash; 13leta Capuletka, odvazna</li><li><strong>Friar Laurence</strong> &ndash; mnich, pokazi zachranny plan</li><li><strong>Tybalt</strong> &ndash; Juliin bratranec, agresivni</li><li><strong>Mercutio</strong> &ndash; Romeov pritel, zemre v souboji</li></ul></div>
+      <div class="content-box fw lt"><h3>&#128218; Literarni teorie + dobovy kontext</h3><div class="lt-grid"><div class="lt-item"><strong>Lit. druh/zanr</strong><span>Drama &mdash; tragedie</span></div><div class="lt-item"><strong>Lit. smer</strong><span>Renesance (prelom 16./17. stol.)</span></div><div class="lt-item"><strong>Forma</strong><span>Verse (blankvers), 5 aktu, dialogy</span></div><div class="lt-item"><strong>Vypravec</strong><span>Neni &mdash; drama; prolog mluvni sbor</span></div><div class="lt-item"><strong>Dobovy kontext</strong><span>Anglicka renesance &mdash; humanismus, clovek v centru, Shakespeare psal pro londynske Globe Theatre. Inspirace italskymi novelami.</span></div><div class="lt-item"><strong>Dalsi dila autora</strong><span>Hamlet, Othello, Macbeth, Sen noci svatojanske, Kupec benatsky</span></div></div></div>
+      <div class="content-box fw mb"><h3>&#127891; Co rict u maturity?</h3><ul><li>Shakespeare = renesance, nejvetsi dramatik anglictiny, Globe Theatre</li><li>Tragedie = hdinove zahynou kvuli osudove shode nahod a nenavisti spolecnosti</li><li>Renesance = humanismus, clovek v centru, individualita, city</li><li>Tema: laska vs. nenavist, rodina vs. svoboda jedince</li></ul></div>
+      <div class="content-box qb"><h3>&#128172; Klicova myslenka</h3><p>Romeo, Romeo, proc jsi Romeo? &mdash; Julie se pta, proc musi nest to nenavidence jmeno, ktere je deli.</p></div>
+      <div class="content-box rb fw"><h3>&#9733; Zapamatuj si</h3><ul><li>Shakespeare = renesance, Anglie, Globe Theatre</li><li>Montague vs. Capulet = dve nepratelske rodiny ve Verone</li><li>Tragedie = oba zemrou kvuli nedorozumeni</li><li>Renesance = humanismus, clovek je dulezity</li></ul></div>
+    </div><button class="quiz-btn" onclick="openQ(2)">&#129504; Otestuj se!</button></div>
+  </div></div><div class="era">
+  <div class="era-header"><span class="era-emoji">&#127800;</span><span class="era-title">Svetova a ceska literatura 19. stoleti</span><span class="era-count">4 knihy</span></div>
   <div class="book-card" id="b3">
     <div class="book-header" onclick="tog(3)">
-      <span class="book-icon">🌺</span>
-      <div class="book-info"><div class="book-title">Kytice</div><div class="book-author">Karel Jaromír Erben · 1853 · Česko</div><div class="book-tags"><span class="tag">Poezie</span><span class="tag">Balady</span><span class="tag">Romantismus</span></div></div>
-      <button class="learn-btn" id="lb3" onclick="lrn(event,3)">☆</button><span class="chevron">▼</span>
+      <span class="book-icon">&#127798;</span>
+      <div class="book-info"><div class="book-title">Kytice</div><div class="book-author">Karel Jaromir Erben &middot; 1853 &middot; Cesko</div><div class="book-tags"><span class="tag">Poezie</span><span class="tag">Balady</span><span class="tag">Romantismus</span></div></div>
+      <button class="learn-btn" id="lb3" onclick="lrn(event,3)">&#9734;</button><span class="chevron">&#9660;</span>
     </div>
     <div class="book-content"><div class="content-grid">
-      <div class="content-box"><h3>📖 O čem to je?</h3><p>Sbírka 13 strašidelných balad z lidových pověstí. Matky, děti, duchové, prokletí. Nejznámější: Polednice (duch odvede dítě), Vodník (utopí ženu), Svatební košile (mrtvý ženich táhne nevěstu na hřbitov). Vždy: někdo poruší morální řád → za to zaplatí.</p></div>
-      <div class="content-box"><h3>🌙 Nejznámější balady</h3><ul><li><strong>Kytice</strong> – duch matky jako květ na hrobě</li><li><strong>Polednice</strong> – matka zavolá polednici, dítě zemře</li><li><strong>Vodník</strong> – vodník unese ženu, zabije jejich dítě</li><li><strong>Svatební košile</strong> – mrtvý ženich táhne dívku</li></ul></div>
-      <div class="content-box fw mb"><h3>🎓 Co říct u maturity?</h3><ul><li><strong>Autor:</strong> Karel Jaromír Erben, český romantik, archivář, sbíral lidové pohádky</li><li><strong>Žánr:</strong> Romantická balada – temné příběhy, tragické konce, nadpřirozeno</li><li><strong>Téma:</strong> Porušení mravního řádu = trest, vztah matka-dítě</li><li><strong>Jazyk:</strong> Rytmický, nápěvný jako lidová píseň</li><li><strong>Přínos:</strong> Vrchol českého romantismu v poezii</li></ul></div>
-      <div class="content-box qb"><h3>💬 Klíčová myšlenka</h3><p>V každé baladě někdo poruší řád — a příroda s nadpřirozenem vykonají spravedlnost. Žádná výjimka.</p></div>
-      <div class="content-box rb fw"><h3>★ Zapamatuj si</h3><ul><li>Erben = český romantismus, sbíral folklor</li><li>13 balad z lidových pověstí, vždy tragický konec</li><li>Balada = báseň s tragickým koncem + nadpřirozeno</li><li>Hlavní myšlenka: porušení řádu = trest</li></ul></div>
-    </div><button class="quiz-btn" onclick="openQ(3)">🧠 Otestuj se!</button></div>
+      <div class="content-box"><h3>&#128214; O cem to je?</h3><p>Sbirka 13 strasidelnych balad z lidovych povesti. Matky, deti, duchove, prokleti. Nejznamejsi: Polednice (duch odvede dite), Vodnik (utopi zenu), Svatebni kosile (mrtvy zenichl tahne nevstu na hrbitov). Vzdy: nekdo porusi moralni rad &rarr; za to zaplati.</p></div>
+      <div class="content-box"><h3>&#127970; Postavy / klic. body</h3><ul><li><strong>Kytice</strong> &ndash; duch matky jako kvet na hrobe</li><li><strong>Polednice</strong> &ndash; matka zavola polednici, dite zemre</li><li><strong>Vodnik</strong> &ndash; vodnik unese zenu, zabije dite</li><li><strong>Svatebni kosile</strong> &ndash; mrtvy zenichl tahne divku</li></ul></div>
+      <div class="content-box fw lt"><h3>&#128218; Literarni teorie + dobovy kontext</h3><div class="lt-grid"><div class="lt-item"><strong>Lit. druh/zanr</strong><span>Lyrickoepicka poezie &mdash; balady</span></div><div class="lt-item"><strong>Lit. smer</strong><span>Cesky romantismus (19. stol.)</span></div><div class="lt-item"><strong>Forma</strong><span>Sbirka 13 basni, rymovana, rytmicka, napevna jako lidova pisen</span></div><div class="lt-item"><strong>Vypravec</strong><span>Er-forma (3. os.), vsvedouci</span></div><div class="lt-item"><strong>Dobovy kontext</strong><span>Narodni obrozeni &mdash; zajem o folklor. Erben byl archyvar, sbiral lidove pohadky a pisne. Obrana jazyka = obrana naroda.</span></div><div class="lt-item"><strong>Dalsi dila autora</strong><span>Prostonarodni ceske pisne a rikadla (sbirka folkloru)</span></div></div></div>
+      <div class="content-box fw mb"><h3>&#127891; Co rict u maturity?</h3><ul><li>Erben = cesky romantismus, archivar, sbiral folklor &mdash; narodni obrozeni</li><li>Balada = lyrickoepicka basan s tragickym koncem a nadprirozenom</li><li>Kompozice: kazda balada = poruseni radu &rarr; nadprirozeny trest &rarr; tragicky konec</li><li>Jazyk: rytmicky, napevny, blizky lidove pisni &mdash; silny emocni ucinck</li></ul></div>
+      <div class="content-box qb"><h3>&#128172; Klicova myslenka</h3><p>V kazde balade nekdo porusi rad &mdash; a priroda s nadprirozenom vykona spravedlnost. Zadna vyjimka.</p></div>
+      <div class="content-box rb fw"><h3>&#9733; Zapamatuj si</h3><ul><li>Erben = cesky romantismus, sbiral folklor</li><li>13 balad, vzdy tragicky konec, nadprirozeno</li><li>Balada = lyrickoepicka basan s tragickym koncem</li><li>Poruseni radu = trest (hlavni myslenka)</li></ul></div>
+    </div><button class="quiz-btn" onclick="openQ(3)">&#129504; Otestuj se!</button></div>
   </div>
-
   <div class="book-card" id="b4">
     <div class="book-header" onclick="tog(4)">
-      <span class="book-icon">🎩</span>
-      <div class="book-info"><div class="book-title">Oliver Twist</div><div class="book-author">Charles Dickens · 1838 · Anglie</div><div class="book-tags"><span class="tag">Román</span><span class="tag">Sociální kritika</span><span class="tag">Realismus</span></div></div>
-      <button class="learn-btn" id="lb4" onclick="lrn(event,4)">☆</button><span class="chevron">▼</span>
+      <span class="book-icon">&#127913;</span>
+      <div class="book-info"><div class="book-title">Oliver Twist</div><div class="book-author">Charles Dickens &middot; 1838 &middot; Anglie</div><div class="book-tags"><span class="tag">Roman</span><span class="tag">Socialni kritika</span><span class="tag">Realismus</span></div></div>
+      <button class="learn-btn" id="lb4" onclick="lrn(event,4)">&#9734;</button><span class="chevron">&#9660;</span>
     </div>
     <div class="book-content"><div class="content-grid">
-      <div class="content-box"><h3>📖 O čem to je?</h3><p>Oliver je sirotek v Anglii 19. stol. Z chudobince uteče do Londýna. Chytí ho gang dětských kapsářů vedený Faginem. Oliver nechce krást. Nakonec se ukáže, že má bohatou rodinu a zlý Monks ho chce připravit o dědictví. Dobro zvítězí — Oliver najde rodinu a bezpečí.</p></div>
-      <div class="content-box"><h3>👥 Postavy</h3><ul><li><strong>Oliver Twist</strong> – sirotek, dobré srdce, nikdy se nezkazí</li><li><strong>Fagin</strong> – vychovává děti ke krádeži</li><li><strong>Bill Sikes</strong> – brutální zločinec</li><li><strong>Nancy</strong> – prostitutka, pomůže Oliverovi</li><li><strong>Monks</strong> – nevlastní bratr, chce ho zničit</li></ul></div>
-      <div class="content-box fw mb"><h3>🎓 Co říct u maturity?</h3><ul><li><strong>Autor:</strong> Charles Dickens, největší anglický realista, psal do časopisů na pokračování</li><li><strong>Žánr:</strong> Sociální román — kritizuje chudobu, chudobince, dětskou práci</li><li><strong>Téma:</strong> Chudoba, dětské utrpení, zachování morálky i v bídě</li><li><strong>Přínos:</strong> Díky Dickensovi se v Anglii zlepšily podmínky pro děti</li></ul></div>
-      <div class="content-box qb"><h3>💬 Slavná věta</h3><p>„Please, sir, I want some more." — Oliver se v chudobinci odváží žádat o přídavek. Odvaha dítěte v nelidském systému.</p></div>
-      <div class="content-box rb fw"><h3>★ Zapamatuj si</h3><ul><li>Dickens = anglický realismus, sociální kritik</li><li>Sirotek v Londýně → gang kapsářů → Fagin</li><li>Kritika: chudobince, dětská práce, Victorian England</li><li>Konec: Oliver najde rodinu, dobro zvítězí</li></ul></div>
-    </div><button class="quiz-btn" onclick="openQ(4)">🧠 Otestuj se!</button></div>
+      <div class="content-box"><h3>&#128214; O cem to je?</h3><p>Oliver je sirotek v Anglii 19. stol. Z chudobince utece do Londyna. Chyti ho gang detskych kapsaru vedeny Faginem. Oliver nechce krast. Nakonec se ukaze, ze ma bohatou rodinu a zly Monks ho chce pripravit o dedictvi. Dobro zvitezi &mdash; Oliver najde rodinu.</p></div>
+      <div class="content-box"><h3>&#127970; Postavy / klic. body</h3><ul><li><strong>Oliver Twist</strong> &ndash; sirotek, dobre srdce</li><li><strong>Fagin</strong> &ndash; vychovava deti ke kradezi</li><li><strong>Bill Sikes</strong> &ndash; brutalni zloclnec</li><li><strong>Nancy</strong> &ndash; prostitutka, pomuze Oliverovi</li><li><strong>Monks</strong> &ndash; nevlastni bratr, chce ho znicit</li></ul></div>
+      <div class="content-box fw lt"><h3>&#128218; Literarni teorie + dobovy kontext</h3><div class="lt-grid"><div class="lt-item"><strong>Lit. druh/zanr</strong><span>Epika &mdash; socialni roman</span></div><div class="lt-item"><strong>Lit. smer</strong><span>Realismus (19. stol., Anglie)</span></div><div class="lt-item"><strong>Forma</strong><span>Roman, er-forma, vysel na pokracovani v casopise</span></div><div class="lt-item"><strong>Vypravec</strong><span>Er-forma (3. os.), vsvedouci, ironie a soucit</span></div><div class="lt-item"><strong>Dobovy kontext</strong><span>Viktorianska Anglie &mdash; prumyslova revoluce, detska prace, chudobince. Dickens sam jako dite pracoval v tovarne. Jeho romany menily zakony.</span></div><div class="lt-item"><strong>Dalsi dila autora</strong><span>Vanocni koleda, David Copperfield, Nadejne vyhlidky</span></div></div></div>
+      <div class="content-box fw mb"><h3>&#127891; Co rict u maturity?</h3><ul><li>Dickens = anglicky realismus, socialni kritik, psal na pokracovani v casopisech</li><li>Socialni roman = kritizuje spolecenske problemy (chudobince, detska prace)</li><li>Realismus = verne zobrazeni skutecnosti, typicke postavy z ruznych vrstev</li><li>Dusicek: Dickensovy romany ovlivnily zlepseni zakonu pro deti v Anglii</li></ul></div>
+      <div class="content-box qb"><h3>&#128172; Klicova myslenka</h3><p>Please, sir, I want some more. &mdash; Oliver se v chudobinci odvazi zadat o pridavek. Odvaha ditete v nelidskem systemu.</p></div>
+      <div class="content-box rb fw"><h3>&#9733; Zapamatuj si</h3><ul><li>Dickens = anglicky realismus, socialni kritika</li><li>Sirotek &rarr; Londyn &rarr; gang Fagina</li><li>Kritika: chudobince, detska prace, Viktorianska Anglie</li><li>Realismus = verne zobrazeni reality</li></ul></div>
+    </div><button class="quiz-btn" onclick="openQ(4)">&#129504; Otestuj se!</button></div>
   </div>
-
   <div class="book-card" id="b5">
     <div class="book-header" onclick="tog(5)">
-      <span class="book-icon">🌻</span>
-      <div class="book-info"><div class="book-title">Babička</div><div class="book-author">Božena Němcová · 1855 · Česko</div><div class="book-tags"><span class="tag">Próza</span><span class="tag">Idyla</span><span class="tag">Nat. obrození</span></div></div>
-      <button class="learn-btn" id="lb5" onclick="lrn(event,5)">☆</button><span class="chevron">▼</span>
+      <span class="book-icon">&#127819;</span>
+      <div class="book-info"><div class="book-title">Babicka</div><div class="book-author">Bozena Nemcova &middot; 1855 &middot; Cesko</div><div class="book-tags"><span class="tag">Proza</span><span class="tag">Idyla</span><span class="tag">Narodni obrozeni</span></div></div>
+      <button class="learn-btn" id="lb5" onclick="lrn(event,5)">&#9734;</button><span class="chevron">&#9660;</span>
     </div>
     <div class="book-content"><div class="content-grid">
-      <div class="content-box"><h3>📖 O čem to je?</h3><p>Babička přijede žít ke dceři na venkov (Staré Bělidlo u Ratibořic). Stane se středem rodiny i okolí. Je moudrá, laskavá, zná léčivé byliny, pomáhá všem. Přátelí se dokonce s kněžnou. Prožívá čtyři roční období s rodinou a pomalu odchází ze světa. Je to vzpomínka Němcové na vlastní babičku.</p></div>
-      <div class="content-box"><h3>👥 Postavy</h3><ul><li><strong>Babička</strong> – moudrá, laskavá, propojuje venkov a šlechtu</li><li><strong>Viktorka</strong> – tragická, zešílela z nešťastné lásky</li><li><strong>Paní kněžna</strong> – přátelí se s babičkou navzdory postavení</li><li><strong>Vnoučata</strong> – Baruška, Jan, Wilhelm, Adélka</li></ul></div>
-      <div class="content-box fw mb"><h3>🎓 Co říct u maturity?</h3><ul><li><strong>Autor:</strong> Božena Němcová, první velká česká spisovatelka, národní obrození</li><li><strong>Žánr:</strong> Próza-idyla — poetický, idealizovaný obraz venkovského života</li><li><strong>Téma:</strong> Tradice, rodina, venkov, moudrost jednoduchého člověka, příroda</li><li><strong>Přínos:</strong> Nejčtenější česká próza vůbec, symbol národní identity</li></ul></div>
-      <div class="content-box qb"><h3>💬 Klíčová myšlenka</h3><p>Babička je ideál — pocta prosté venkované ženě jako nositelce morálky, tradic a lásky. „Takový člověk existoval."</p></div>
-      <div class="content-box rb fw"><h3>★ Zapamatuj si</h3><ul><li>Němcová = realismus + národní obrození, 19. stol.</li><li>Staré Bělidlo = místo děje, venkov u Ratibořic</li><li>Babička = symbol moudrosti a tradic</li><li>Viktorka = vedlejší tragická postava (zešílela z lásky)</li></ul></div>
-    </div><button class="quiz-btn" onclick="openQ(5)">🧠 Otestuj se!</button></div>
+      <div class="content-box"><h3>&#128214; O cem to je?</h3><p>Babicka prijede zit ke dcere na venkov (Stare Belidlo u Ratiboric). Stane se stredem rodiny i okoli. Je moudra, laskava, pratelise dokonce s kneznou. Proziva ctyri rocni obdobi s rodinou a pomalu odchazi ze sveta. Je to vzpominka Nemcove na vlastni babicku.</p></div>
+      <div class="content-box"><h3>&#127970; Postavy / klic. body</h3><ul><li><strong>Babicka</strong> &ndash; moudra, laskava, propojuje venkov a slechtu</li><li><strong>Viktorka</strong> &ndash; tragicka, zesila z nestastne lasky</li><li><strong>Pani knezna</strong> &ndash; pratelise s babickou navzdory postaveni</li><li><strong>Vnoucata</strong> &ndash; Baruska, Jan, Wilhelm, Adelka</li></ul></div>
+      <div class="content-box fw lt"><h3>&#128218; Literarni teorie + dobovy kontext</h3><div class="lt-grid"><div class="lt-item"><strong>Lit. druh/zanr</strong><span>Epika &mdash; prozaicka idyla (autobiograficka)</span></div><div class="lt-item"><strong>Lit. smer</strong><span>Narodni obrozeni, prvky romantismu a realismu</span></div><div class="lt-item"><strong>Forma</strong><span>Proza, er-forma, cyklicka kompozice (4 rocni obdobi)</span></div><div class="lt-item"><strong>Vypravec</strong><span>Er-forma (3. os.), lyricky, nostalgicky ton</span></div><div class="lt-item"><strong>Dobovy kontext</strong><span>Narodni obrozeni &mdash; zachrana cestiny a kultury. Nemcova psala v tezkem osobnim obdobi (nemoc syna, chudoba). Babicka = utek do idealizovaneho detstvi.</span></div><div class="lt-item"><strong>Dalsi dila autorky</strong><span>Slovenske pohadky a povesti, Diva Bara, Pan ucitel</span></div></div></div>
+      <div class="content-box fw mb"><h3>&#127891; Co rict u maturity?</h3><ul><li>Nemcova = prvni velka ceska prozaicka, narodni obrozeni</li><li>Idyla = idealizovany, poeticky obraz &mdash; ne objektivni realismus</li><li>Kompozice cyklicka: 4 rocni obdobi = kolobeh zivota</li><li>Tema: tradice, venkov, moudrost prosteho cloveka, priroda, zenska sila</li></ul></div>
+      <div class="content-box qb"><h3>&#128172; Klicova myslenka</h3><p>Babicka je ideal &mdash; pocta proste venkovance jako nositelce moralky, tradic a lasky. Nemcova pise o tom, co ztratila.</p></div>
+      <div class="content-box rb fw"><h3>&#9733; Zapamatuj si</h3><ul><li>Nemcova = narodni obrozeni, 19. stol.</li><li>Stare Belidlo = misto deje u Ratiboric</li><li>Idyla = idealizovany obraz venkova (ne realita!)</li><li>Viktorka = vedlejsi tragicka postava (zesila z lasky)</li></ul></div>
+    </div><button class="quiz-btn" onclick="openQ(5)">&#129504; Otestuj se!</button></div>
   </div>
-
   <div class="book-card" id="b6">
     <div class="book-header" onclick="tog(6)">
-      <span class="book-icon">🏯</span>
-      <div class="book-info"><div class="book-title">Noc na Karlštejně</div><div class="book-author">Jaroslav Vrchlický · 1884 · Česko</div><div class="book-tags"><span class="tag">Divadlo</span><span class="tag">Hist. komedie</span><span class="tag">Lumírovci</span></div></div>
-      <button class="learn-btn" id="lb6" onclick="lrn(event,6)">☆</button><span class="chevron">▼</span>
+      <span class="book-icon">&#127983;</span>
+      <div class="book-info"><div class="book-title">Noc na Karlstejne</div><div class="book-author">Jaroslav Vrchlicky &middot; 1884 &middot; Cesko</div><div class="book-tags"><span class="tag">Divadlo</span><span class="tag">Komedie</span><span class="tag">Lumirovci</span></div></div>
+      <button class="learn-btn" id="lb6" onclick="lrn(event,6)">&#9734;</button><span class="chevron">&#9660;</span>
     </div>
     <div class="book-content"><div class="content-grid">
-      <div class="content-box"><h3>📖 O čem to je?</h3><p>Na hradě Karlštejn platí zákon: žádná žena nesmí přes noc zůstat. Karel IV. to nařídil pro klid. Ale tři ženy se tam tajně dostanou — královna, markrabinka a dívka Alena (převlečená za pažete). Vznikne zmatek, žárlivost, romantika. Karel nakonec vše odpustí a Alenu provdá za rytíře.</p></div>
-      <div class="content-box"><h3>👥 Postavy</h3><ul><li><strong>Karel IV.</strong> – moudrý, velkorysý král</li><li><strong>Alena</strong> – dívka převlečená za chlapce-pažete</li><li><strong>Petr z Moravan</strong> – rytíř, zamiluje se do Aleny</li><li><strong>Královna</strong> – žárlí na manžela</li></ul></div>
-      <div class="content-box fw mb"><h3>🎓 Co říct u maturity?</h3><ul><li><strong>Autor:</strong> Jaroslav Vrchlický, lumírovec, 2. pol. 19. stol., inspiroval se Evropou</li><li><strong>Žánr:</strong> Historická komedie / veselohra z dob Karla IV.</li><li><strong>Téma:</strong> Láska, zákon vs. srdce, záměna identity</li><li><strong>Jazyk:</strong> Elegantní rýmovaný verš, vtipné dialogy</li><li><strong>Přínos:</strong> Karel IV. jako moudrý a lidský král, ne tyran</li></ul></div>
-      <div class="content-box qb"><h3>💬 Klíčová myšlenka</h3><p>I přísná pravidla musí ustoupit lásce a lidskosti. Karel IV. je zobrazen jako velkorysý člověk, ne jen panovník.</p></div>
-      <div class="content-box rb fw"><h3>★ Zapamatuj si</h3><ul><li>Vrchlický = lumírovec, česky 19. stol.</li><li>Karlštejn = ženy nesmí přes noc, ale 3 se tam dostanou</li><li>Karel IV. jako hlavní postava, velkorysý</li><li>Historická komedie = zábavná, ne tragická</li></ul></div>
-    </div><button class="quiz-btn" onclick="openQ(6)">🧠 Otestuj se!</button></div>
-  </div>
-</div>
-
-<div class="era">
-  <div class="era-header"><span class="era-emoji">🌍</span><span class="era-title">Světová literatura 20. a 21. století</span><span class="era-count">5 knih</span></div>
-
+      <div class="content-box"><h3>&#128214; O cem to je?</h3><p>Na hrade Karlstejn plati zakon Karla IV.: zeny nesmi pres noc zustat. Presto se tam tajne dostanou tri zeny &mdash; kralova milenka, jeho dcera a dcera purkrabiho. Kral to zjisti, ale udeli milost. Vesela historicka komedie o lasce a pravidlech.</p></div>
+      <div class="content-box"><h3>&#127970; Postavy / klic. body</h3><ul><li><strong>Karel IV.</strong> &ndash; kral, moudry a shovivjavy</li><li><strong>Eliska Premyslovna</strong> &ndash; kralova zena (zarljva)</li><li><strong>Alena</strong> &ndash; dcera purkrabiho, zamilovana do rytire</li><li><strong>Pesek</strong> &ndash; komornik, komicka postava</li></ul></div>
+      <div class="content-box fw lt"><h3>&#128218; Literarni teorie + dobovy kontext</h3><div class="lt-grid"><div class="lt-item"><strong>Lit. druh/zanr</strong><span>Drama &mdash; historicka komedie</span></div><div class="lt-item"><strong>Lit. smer</strong><span>Lumirovci (ceska lit. 2. pol. 19. stol.)</span></div><div class="lt-item"><strong>Forma</strong><span>Versovana hra, dialogy, 3 dejstvi</span></div><div class="lt-item"><strong>Vypravec</strong><span>Neni &mdash; divadlo</span></div><div class="lt-item"><strong>Dobovy kontext</strong><span>Lumirovci = skupina basniku (Vrchlicky, Zeyer) napojena na evropskou literaturu. Ceska literatura hledala svetovy rozmer po narodnim obrozeni.</span></div><div class="lt-item"><strong>Dalsi dila autora</strong><span>Zlomky epopeje, stovky basni, preklady</span></div></div></div>
+      <div class="content-box fw mb"><h3>&#127891; Co rict u maturity?</h3><ul><li>Vrchlicky = Lumirovci, 2. pol. 19. stol., propojoval ceskou lit. s evropskou</li><li>Historicka komedie = realne historicke prostredi + vymysleny pribeh</li><li>Tema: conflict pravidel a citu, laska silnejsi nez zakaz</li><li>Karel IV. = idealizovany panovnik, symbol zlate doby Cech</li></ul></div>
+      <div class="content-box qb"><h3>&#128172; Klicova myslenka</h3><p>Zeny preistiji i prisny kralovsky zakon. Laska najde cestu &mdash; a moudry kral odpusti.</p></div>
+      <div class="content-box rb fw"><h3>&#9733; Zapamatuj si</h3><ul><li>Vrchlicky = Lumirovci, 2. pol. 19. stol.</li><li>Na Karlstejn nesmi zeny pres noc &mdash; 3 se tam tajne dostanou</li><li>Historicka komedie = skutecne prostredi + smysleny pribeh</li><li>Karel IV. = moudry, odpoustejici panovnik</li></ul></div>
+    </div><button class="quiz-btn" onclick="openQ(6)">&#129504; Otestuj se!</button></div>
+  </div></div><div class="era">
+  <div class="era-header"><span class="era-emoji">&#127757;</span><span class="era-title">Svetova literatura 20. a 21. stoleti</span><span class="era-count">5 knih</span></div>
   <div class="book-card" id="b7">
     <div class="book-header" onclick="tog(7)">
-      <span class="book-icon">🚉</span>
-      <div class="book-info"><div class="book-title">My děti ze stanice Zoo</div><div class="book-author">Christiane F. & Kai Hermann · 1978 · Německo</div><div class="book-tags"><span class="tag">Autobiografie</span><span class="tag">Dokument</span><span class="tag">Varování</span></div></div>
-      <button class="learn-btn" id="lb7" onclick="lrn(event,7)">☆</button><span class="chevron">▼</span>
+      <span class="book-icon">&#128137;</span>
+      <div class="book-info"><div class="book-title">My deti ze stanice Zoo</div><div class="book-author">Christiane F. &middot; 1978 &middot; Nemecko</div><div class="book-tags"><span class="tag">Autobiografie</span><span class="tag">Dokument</span><span class="tag">Drogova zavislost</span></div></div>
+      <button class="learn-btn" id="lb7" onclick="lrn(event,7)">&#9734;</button><span class="chevron">&#9660;</span>
     </div>
     <div class="book-content"><div class="content-grid">
-      <div class="content-box"><h3>📖 O čem to je?</h3><p>Skutečný příběh Christiany F. — berlínské dívky, která v 13 letech začala brát heroin. Kvůli drogám se stala prostitutkou u berlínského nádraží Zoo. Ukazuje, jak rychle se normální dívka propadne do světa drog. Je to varování — ne glorifikace. Christiane závislost nakonec překonala.</p></div>
-      <div class="content-box"><h3>⚠️ Klíčové body</h3><ul><li>Skutečný příběh, ne fikce</li><li>Berlín 70. let — drogy, punk, subkultura</li><li>Nádraží Zoo = místo, kde se scházeli narkomané</li><li>Rozvrat rodiny jako příčina</li><li>Kniha šokovala Německo, přeložena do 25 jazyků</li></ul></div>
-      <div class="content-box fw mb"><h3>🎓 Co říct u maturity?</h3><ul><li><strong>Žánr:</strong> Autobiografická reportáž — skutečný příběh zpracovaný novinářem</li><li><strong>Téma:</strong> Drogová závislost, rozpad rodiny jako příčina, sociální vyloučení mládeže</li><li><strong>Jazyk:</strong> Přímý, bez příkras, autentický</li><li><strong>Přínos:</strong> Jedno z nejvlivnějších varovných svědectví 20. stol.</li></ul></div>
-      <div class="content-box qb"><h3>💬 Klíčová myšlenka</h3><p>Christiane nebyla „špatná dívka." Pocházela z rozvrácené rodiny, hledala útěk. Drogy jí daly iluzi a vzaly vše reálné.</p></div>
-      <div class="content-box rb fw"><h3>★ Zapamatuj si</h3><ul><li>Christiane F. = skutečná osoba, Berlín, 70. léta</li><li>Heroin od 13 let → prostituce → záchrana</li><li>Autobiografie = opravdový příběh</li><li>Poselství: drogy = zkáza, varování pro mládež</li></ul></div>
-    </div><button class="quiz-btn" onclick="openQ(7)">🧠 Otestuj se!</button></div>
+      <div class="content-box"><h3>&#128214; O cem to je?</h3><p>Christiane F. zije ve West Berline 70. let. Ve 13 zkusi heroin na diskotece Sound. Rychle se stane zavislou. Prodava se, aby mela na davku. Jeji pritel Detlef take. Ziji v podsveti u Zoo-stanice. Kniha je jeji vypoved noinarum &mdash; autenticky dokument o padu.</p></div>
+      <div class="content-box"><h3>&#127970; Postavy / klic. body</h3><ul><li><strong>Christiane F.</strong> &ndash; vypravecka, zavislya ve 13 letech</li><li><strong>Detlef</strong> &ndash; pritel, take zavisly</li><li><strong>Babsi</strong> &ndash; kamaradka, zemrela na predavkovani</li><li><strong>Matka</strong> &ndash; nestaci situaci zvladnout</li></ul></div>
+      <div class="content-box fw lt"><h3>&#128218; Literarni teorie + dobovy kontext</h3><div class="lt-grid"><div class="lt-item"><strong>Lit. druh/zanr</strong><span>Epika &mdash; autobiograficky dokumentarni roman</span></div><div class="lt-item"><strong>Lit. smer</strong><span>Dokumentarni literatura (70. leta, Zapad)</span></div><div class="lt-item"><strong>Forma</strong><span>1. osoba (ich-forma), prepis vypovedi, hovorovy jazyk</span></div><div class="lt-item"><strong>Vypravec</strong><span>Ich-forma &mdash; sama Christiane, prima vypoved</span></div><div class="lt-item"><strong>Dobovy kontext</strong><span>Zapadni Berlin 70. let &mdash; studena valka, rozdelene mesto, heroinova epidemie mladeze, punk, diskokluby. Zoo = centralni bod bidy.</span></div><div class="lt-item"><strong>Spoluautori</strong><span>Novinari Kai Hermann a Horst Rieck &mdash; zapsali Christianin pribeh</span></div></div></div>
+      <div class="content-box fw mb"><h3>&#127891; Co rict u maturity?</h3><ul><li>Autobiograficky dokumentarni roman = skutecny pribeh, zapsan jako novinarsky dokument</li><li>Ich-forma = vypraveci sama Christiane &mdash; maximalni autenticita, sok z primosti</li><li>Dobovy kontext: West Berlin 70. let, heroinova epidemie, punk kultura</li><li>Funkce: varovana literatura &mdash; literatura faktu, ne fikce</li></ul></div>
+      <div class="content-box qb"><h3>&#128172; Klicova myslenka</h3><p>Drogy zacinaji jako utek z nudy &mdash; a skoncji v pasti, ze ktere se skoro neda dostat. Christiane to prezila. Babsi ne.</p></div>
+      <div class="content-box rb fw"><h3>&#9733; Zapamatuj si</h3><ul><li>Autobiografie = skutecny pribeh, ich-forma</li><li>West Berlin 70. let &mdash; heroin, Zoo-stanice, podsveti</li><li>Ve 13 zavislya &rarr; prostituce &rarr; pokus o odvykani</li><li>Varovana literatura &mdash; meni pohled spolecnosti na drogy</li></ul></div>
+    </div><button class="quiz-btn" onclick="openQ(7)">&#129504; Otestuj se!</button></div>
   </div>
-
   <div class="book-card" id="b8">
     <div class="book-header" onclick="tog(8)">
-      <span class="book-icon">🎣</span>
-      <div class="book-info"><div class="book-title">Stařec a moře</div><div class="book-author">Ernest Hemingway · 1952 · USA</div><div class="book-tags"><span class="tag">Novela</span><span class="tag">Symbolismus</span><span class="tag">Nobelova cena</span></div></div>
-      <button class="learn-btn" id="lb8" onclick="lrn(event,8)">☆</button><span class="chevron">▼</span>
+      <span class="book-icon">&#127754;</span>
+      <div class="book-info"><div class="book-title">Starec a more</div><div class="book-author">Ernest Hemingway &middot; 1952 &middot; USA</div><div class="book-tags"><span class="tag">Novela</span><span class="tag">Symbol</span><span class="tag">Modernismus</span></div></div>
+      <button class="learn-btn" id="lb8" onclick="lrn(event,8)">&#9734;</button><span class="chevron">&#9660;</span>
     </div>
     <div class="book-content"><div class="content-grid">
-      <div class="content-box"><h3>📖 O čem to je?</h3><p>Starý rybář Santiago tři měsíce nic nechytil. Vypluje daleko od Kuby a chytí obrovského marlína. Tři dny s ním bojuje — sám na moři. Vyhraje. Ale na cestě zpět žraloci rybu sežerou. Vrátí se jen s kostrou. Santiago ale neprohrál — bojoval do konce a to je vítězství ducha.</p></div>
-      <div class="content-box"><h3>🐠 Symbolika</h3><ul><li><strong>Santiago</strong> = člověk, který odmítá vzdát se</li><li><strong>Marlín</strong> = cíl, sen, velký životní boj</li><li><strong>Žraloci</strong> = svět, osud, zlo co bere výsledky</li><li><strong>Moře</strong> = život, nepředvídatelný a krásný</li><li><strong>Manolin</strong> = naděje, věrnost, nová generace</li></ul></div>
-      <div class="content-box fw mb"><h3>🎓 Co říct u maturity?</h3><ul><li><strong>Autor:</strong> Ernest Hemingway, americký modernista, Nobelova cena 1954</li><li><strong>Žánr:</strong> Novela — minimum postav, hluboká symbolika</li><li><strong>Téma:</strong> Odvaha, houževnatost, lidská důstojnost ve tváří prohry</li><li><strong>Styl:</strong> „Ledovcový princip" — málo slov, ale říkají mnoho</li></ul></div>
-      <div class="content-box qb"><h3>💬 Klíčová věta</h3><p>„Člověka lze zničit, ale ne porazit." — Smysl je v boji samotném, ne jen v výsledku.</p></div>
-      <div class="content-box rb fw"><h3>★ Zapamatuj si</h3><ul><li>Hemingway = USA, modernismus, Nobelova cena 1954</li><li>Rybář + marlín + žraloci sežerou rybu → jen kostra</li><li>„Ledovcový princip" = málo slov, hluboký smysl</li><li>Téma: bojovat do konce = vítězství ducha</li></ul></div>
-    </div><button class="quiz-btn" onclick="openQ(8)">🧠 Otestuj se!</button></div>
+      <div class="content-box"><h3>&#128214; O cem to je?</h3><p>Stary rybar Santiago 84 dni nic nechytil. Vydase sam na more a chyti obrovsky marlin. Tri dny s nim bojuje. Nakonec ho uvazuje k lodi &mdash; ale zraloci ho po ceste zpet celeho sezrou. Santiago se vrati jen s kostrou. Presto nepodlehl.</p></div>
+      <div class="content-box"><h3>&#127970; Postavy / klic. body</h3><ul><li><strong>Santiago</strong> &ndash; stary rybar, hrdost a vytvalost</li><li><strong>Manolin</strong> &ndash; mlady chlapec, veri v Santiaga</li><li><strong>Marlin</strong> &ndash; obrovsky ryba, symbol vyzvy</li><li><strong>Zraloci</strong> &ndash; symbol krutosti osudu</li></ul></div>
+      <div class="content-box fw lt"><h3>&#128218; Literarni teorie + dobovy kontext</h3><div class="lt-grid"><div class="lt-item"><strong>Lit. druh/zanr</strong><span>Epika &mdash; novela (kratsi roman)</span></div><div class="lt-item"><strong>Lit. smer</strong><span>Americky modernismus, ztracena generace</span></div><div class="lt-item"><strong>Forma</strong><span>Er-forma, minimalisticky styl &mdash; kratke vety, zadne zbytecne slovo</span></div><div class="lt-item"><strong>Vypravec</strong><span>Er-forma (3. os.), vsvedouci, vnitrni monolog Santiaga</span></div><div class="lt-item"><strong>Dobovy kontext</strong><span>Amerika po 2. sv. valce &mdash; Hemingway, Fitzgerald, Steinbeck = ztracena generace. Za tuto novelu dostal Nobelovu cenu (1954).</span></div><div class="lt-item"><strong>Dalsi dila autora</strong><span>Komu zvoni hrana, Sbohem armado, Fiesta (The Sun Also Rises)</span></div></div></div>
+      <div class="content-box fw mb"><h3>&#127891; Co rict u maturity?</h3><ul><li>Hemingway = americky modernismus, ztracena generace, Nobelova cena 1954</li><li>Novela = kratsi prozaicky utvar, jeden pribeh, omezeny pocet postav</li><li>Styl: teorie ledovce &mdash; pise stroze, pod povrchem je hloubka</li><li>Tema: dustojnost v porazce, smysl boje sameho, stari vs. priroda</li></ul></div>
+      <div class="content-box qb"><h3>&#128172; Klicova myslenka</h3><p>Cloveka lze znicit, ale ne porazit. &mdash; Santiago prijde o rybu, ale bojoval do konce. Smysl je v boji samotnem.</p></div>
+      <div class="content-box rb fw"><h3>&#9733; Zapamatuj si</h3><ul><li>Hemingway = americky modernismus, Nobelova cena 1954</li><li>Teorie ledovce = minimum slov, maximum smyslu</li><li>Santiago = symbol lidske dustojnosti a vytvalosti</li><li>Novela = jeden pribeh, mene postav nez roman</li></ul></div>
+    </div><button class="quiz-btn" onclick="openQ(8)">&#129504; Otestuj se!</button></div>
   </div>
-
   <div class="book-card" id="b9">
     <div class="book-header" onclick="tog(9)">
-      <span class="book-icon">🪲</span>
-      <div class="book-info"><div class="book-title">Proměna</div><div class="book-author">Franz Kafka · 1915 · Praha/Německo</div><div class="book-tags"><span class="tag">Novela</span><span class="tag">Absurdo</span><span class="tag">Existencialismus</span></div></div>
-      <button class="learn-btn" id="lb9" onclick="lrn(event,9)">☆</button><span class="chevron">▼</span>
+      <span class="book-icon">&#129410;</span>
+      <div class="book-info"><div class="book-title">Promena</div><div class="book-author">Franz Kafka &middot; 1915 &middot; Praha/Nemecko</div><div class="book-tags"><span class="tag">Novela</span><span class="tag">Expresionismus</span><span class="tag">Absurdno</span></div></div>
+      <button class="learn-btn" id="lb9" onclick="lrn(event,9)">&#9734;</button><span class="chevron">&#9660;</span>
     </div>
     <div class="book-content"><div class="content-grid">
-      <div class="content-box"><h3>📖 O čem to je?</h3><p>Obchodní cestující Řehoř Samsa se ráno probudí jako obrovský brouk. Nemůže pracovat. Rodina ho nejdřív opatruje, pak snáší, pak ignoruje. Je pro ně zátěží. Nakonec zemře — a rodina si oddechne. Alegorie o tom, co se stane, když přestaneš být „užitečný."</p></div>
-      <div class="content-box"><h3>🔍 Co to znamená?</h3><ul><li><strong>Brouk</strong> = člověk bez „hodnoty" pro společnost</li><li><strong>Rodina</strong> = miluje tě jen dokud „funguje"</li><li><strong>Řehoř</strong> = dělník-stroj, jehož identita = jen práce</li><li><strong>Otec</strong> = autoritativní, bez soucitu</li><li>Proměna fyzická = metafora psychologická</li></ul></div>
-      <div class="content-box fw mb"><h3>🎓 Co říct u maturity?</h3><ul><li><strong>Autor:</strong> Franz Kafka, pražský Němec, psal německy, nejpřekládanější český autor světa</li><li><strong>Žánr:</strong> Alegorická novela — fyzická proměna jako symbol odcizení</li><li><strong>Téma:</strong> Odcizení, ztráta identity, rodina jako past</li><li><strong>Styl:</strong> Absurdní situace popsaná normálním jazykem — čtenář to přijme jako fakt</li><li><strong>Přínos:</strong> „Kafkovský" = slovo ve slovnících světa</li></ul></div>
-      <div class="content-box qb"><h3>💬 Slavná první věta</h3><p>„Jednoho rána se Řehoř Samsa probudil a shledal, že leží ve svém lůžku proměněn v obrovský hmyz." — Kafka to řekne prostě. A to je ještě děsivější.</p></div>
-      <div class="content-box rb fw"><h3>★ Zapamatuj si</h3><ul><li>Kafka = Praha, psal německy, absurdo, odcizení</li><li>Řehoř = muž → brouk → rodina ho nechá zemřít</li><li>Alegorie = brouk symbolizuje lidské odcizení</li><li>„Kafkovský" = absurdní, nesmyslný systém</li></ul></div>
-    </div><button class="quiz-btn" onclick="openQ(9)">🧠 Otestuj se!</button></div>
+      <div class="content-box"><h3>&#128214; O cem to je?</h3><p>Rehor Samsa se rano probudi jako obrovsky brouk. Rodina se boji. Prestane chodit do prace. Rodina ho nejdriv terpi, pak nenavidji. Sestra, ktere byl nejbliz, ho nakonec zavrne. Rehor zemre. Rodina si oddychne a vyrazji na vylet. Desive &mdash; a pritom klidne napsane.</p></div>
+      <div class="content-box"><h3>&#127970; Postavy / klic. body</h3><ul><li><strong>Rehor Samsa</strong> &ndash; obchodni cestujici, zivitel rodiny, brouk</li><li><strong>Greta</strong> &ndash; sestra, zpoetku pecuje, nakonec zavrne</li><li><strong>Otec</strong> &ndash; stydise, nakonec ho napadne jablkem</li><li><strong>Matka</strong> &ndash; neschopna situaci prijmout</li></ul></div>
+      <div class="content-box fw lt"><h3>&#128218; Literarni teorie + dobovy kontext</h3><div class="lt-grid"><div class="lt-item"><strong>Lit. druh/zanr</strong><span>Epika &mdash; novela (groteskni, absurdni)</span></div><div class="lt-item"><strong>Lit. smer</strong><span>Expresionismus, existencialismus, absurdni literatura</span></div><div class="lt-item"><strong>Forma</strong><span>Er-forma, 3 casti, vecny klidny jazyk &mdash; kontrast s desivym obsahem</span></div><div class="lt-item"><strong>Vypravec</strong><span>Er-forma (3. os.), pohled blizky Rehorovi, vnitrni monology</span></div><div class="lt-item"><strong>Dobovy kontext</strong><span>Praha prelomu 19./20. stol. &mdash; Kafka, nemecky pisici Zid z Prahy. Pocit odcizeni, byrokracie Habsburske rise, moderni clovek jako hmyz v systemu.</span></div><div class="lt-item"><strong>Dalsi dila autora</strong><span>Proces, Zamek, V trestanecke kolonii, Amerika (Nezvesty)</span></div></div></div>
+      <div class="content-box fw mb"><h3>&#127891; Co rict u maturity?</h3><ul><li>Kafka = expresionismus/absurdno, nemecky pisici Zid z Prahy, prelom 19./20. stol.</li><li>Novela s grotesknim prvkem &mdash; premena je podana vecne, jako by byla normalni (to je zamer!)</li><li>Tema: odcizeni, ztrata identity, clovek jako bremen rodine a systemu</li><li>Symbol: brouk = bezmoc, ztrata lidske hodnoty v moderni spolecnosti</li></ul></div>
+      <div class="content-box qb"><h3>&#128172; Klicova myslenka</h3><p>Rehor byl pro rodinu 'brouk' (breme) i pred premenou &mdash; zivil je, ale nebyl viden. Premena je jen viditelna metafora.</p></div>
+      <div class="content-box rb fw"><h3>&#9733; Zapamatuj si</h3><ul><li>Kafka = absurdno, expresionismus, Pragan pisici nemecky</li><li>Rehor se probudi jako brouk &mdash; rodina ho zavrne</li><li>Vecny styl + absurdni obsah = Kafkuv rukopis</li><li>Tema: odcizeni moderniho cloveka, ztrata identity</li></ul></div>
+    </div><button class="quiz-btn" onclick="openQ(9)">&#129504; Otestuj se!</button></div>
   </div>
-
   <div class="book-card" id="b10">
     <div class="book-header" onclick="tog(10)">
-      <span class="book-icon">🐷</span>
-      <div class="book-info"><div class="book-title">Farma zvířat</div><div class="book-author">George Orwell · 1945 · Anglie</div><div class="book-tags"><span class="tag">Alegorie</span><span class="tag">Satira</span><span class="tag">Politika</span></div></div>
-      <button class="learn-btn" id="lb10" onclick="lrn(event,10)">☆</button><span class="chevron">▼</span>
+      <span class="book-icon">&#128055;</span>
+      <div class="book-info"><div class="book-title">Farma zvirat</div><div class="book-author">George Orwell &middot; 1945 &middot; Anglie</div><div class="book-tags"><span class="tag">Bajka</span><span class="tag">Alegorie</span><span class="tag">Antiutopie</span></div></div>
+      <button class="learn-btn" id="lb10" onclick="lrn(event,10)">&#9734;</button><span class="chevron">&#9660;</span>
     </div>
     <div class="book-content"><div class="content-grid">
-      <div class="content-box"><h3>📖 O čem to je?</h3><p>Zvířata vyženou farmáře Jonese a založí svou republiku. „Všechna zvířata si jsou rovna." Ale prasata postupně převezmou moc. Napoleon (prase) se stane diktátorem horším než původní farmář. Pravidlo se změní: „Všechna zvířata si jsou rovna, ale někteří jsou si rovnější."</p></div>
-      <div class="content-box"><h3>🐖 Kdo je kdo?</h3><ul><li><strong>Napoleon</strong> = Stalin / diktátor</li><li><strong>Snowball</strong> = Trockij (vyhnán)</li><li><strong>Boxer</strong> = věrný dělník → odeslán na jatka</li><li><strong>Squealer</strong> = propaganda, médium režimu</li><li><strong>Jones</strong> = svržený car / kapitalista</li></ul></div>
-      <div class="content-box fw mb"><h3>🎓 Co říct u maturity?</h3><ul><li><strong>Autor:</strong> George Orwell, anglický antitotalitní spisovatel, 20. stol.</li><li><strong>Žánr:</strong> Politická alegorie/bajka — zvířata = historické postavy SSSR</li><li><strong>Téma:</strong> Revoluce se zradí sama, moc korumpuje, propaganda ovládá masy</li><li><strong>Paralela:</strong> Ruská revoluce 1917 → Stalin → totalitní SSSR</li><li><strong>Přínos:</strong> „Orwellovský" = manipulativní, totalitní</li></ul></div>
-      <div class="content-box qb"><h3>💬 Slavná věta</h3><p>„Všechna zvířata si jsou rovna, ale někteří jsou si rovnější." Dokonalý popis pokrytectví každé totality.</p></div>
-      <div class="content-box rb fw"><h3>★ Zapamatuj si</h3><ul><li>Orwell = Anglie, politická alegorie, antitotalita</li><li>Napoleon (prase) = Stalin, Snowball = Trockij</li><li>Bajka = zvířata jednají jako lidé, jiný smysl</li><li>Revoluce → tyranie = hlavní poselství</li></ul></div>
-    </div><button class="quiz-btn" onclick="openQ(10)">🧠 Otestuj se!</button></div>
+      <div class="content-box"><h3>&#128214; O cem to je?</h3><p>Zvirata vyzenenou farmare Jonese a vytvorji vlastni vladu &mdash; Animalizmus. Prasata vedou. Napoleon (prase) se stane diktatorom, zahaniji soupere Snowballa. Pravidla se postupne meni. Nakonec prasata chodi po dvou, nosji obleceni a hrajicsi karty s lidmi. Zvirata nepoznají rozdil.</p></div>
+      <div class="content-box"><h3>&#127970; Postavy / klic. body</h3><ul><li><strong>Napoleon</strong> &ndash; Stalin (diktator)</li><li><strong>Snowball</strong> &ndash; Trockij (vyhnan)</li><li><strong>Starec Major</strong> &ndash; Marx/Lenin (idea revoluce)</li><li><strong>Boxer</strong> &ndash; verny lid (nakonec zrazen)</li><li><strong>Jones</strong> &ndash; car Mikulas II.</li></ul></div>
+      <div class="content-box fw lt"><h3>&#128218; Literarni teorie + dobovy kontext</h3><div class="lt-grid"><div class="lt-item"><strong>Lit. druh/zanr</strong><span>Epika &mdash; alegoricka bajka / antiutopie</span></div><div class="lt-item"><strong>Lit. smer</strong><span>Politicka literatura, satira (20. stol.)</span></div><div class="lt-item"><strong>Forma</strong><span>Er-forma, kratky roman, prehledna kompozice</span></div><div class="lt-item"><strong>Vypravec</strong><span>Er-forma (3. os.), neutralni, pozorovatel</span></div><div class="lt-item"><strong>Dobovy kontext</strong><span>Napsano 1943-44, vydano 1945 po 2. sv. valce. Orwell bojoval ve spanelske obcanske valce, zazil stalinismus. Alegorie: ruska revoluce 1917 &rarr; stalinsky SSSR.</span></div><div class="lt-item"><strong>Dalsi dila autora</strong><span>1984 (dystopie), Na dne v Parizi a Londyne, Barmske dny</span></div></div></div>
+      <div class="content-box fw mb"><h3>&#127891; Co rict u maturity?</h3><ul><li>Orwell = anglicka politicka literatura, satira na totalitu, 20. stol.</li><li>Alegorie = pribeh zvirat = alegorie na ruskou revoluci a stalinismus</li><li>Bajka = zvirata mluvji a jednajci jako lide, maji moralni pouceni</li><li>Klicovy motiv: Vsechna zvirata jsou si rovna, ale nektera jsou si rovnejsi</li></ul></div>
+      <div class="content-box qb"><h3>&#128172; Klicova myslenka</h3><p>Vsechna zvirata jsou si rovna, ale nektera jsou si rovnejsi. &mdash; Prepisane pravidlo = jak totalita zkorumpuje kazdou revoluci.</p></div>
+      <div class="content-box rb fw"><h3>&#9733; Zapamatuj si</h3><ul><li>Orwell = alegorie na SSSR, stalinismus</li><li>Napoleon = Stalin, Snowball = Trockij, Boxer = verny lid</li><li>Alegoricka bajka = zvirata = politicke postavy</li><li>Vsechna jsou si rovna, ale nektera rovnejsi = symbol korupce moci</li></ul></div>
+    </div><button class="quiz-btn" onclick="openQ(10)">&#129504; Otestuj se!</button></div>
   </div>
-
   <div class="book-card" id="b11">
     <div class="book-header" onclick="tog(11)">
-      <span class="book-icon">⚡</span>
-      <div class="book-info"><div class="book-title">Harry Potter a kámen mudrců</div><div class="book-author">J. K. Rowling · 1997 · Anglie</div><div class="book-tags"><span class="tag">Fantasy</span><span class="tag">Bildungsroman</span><span class="tag">Bestseller</span></div></div>
-      <button class="learn-btn" id="lb11" onclick="lrn(event,11)">☆</button><span class="chevron">▼</span>
+      <span class="book-icon">&#9889;</span>
+      <div class="book-info"><div class="book-title">Harry Potter a kamen mudrucu</div><div class="book-author">J. K. Rowling &middot; 1997 &middot; Anglie</div><div class="book-tags"><span class="tag">Roman</span><span class="tag">Fantasy</span><span class="tag">Bildungsroman</span></div></div>
+      <button class="learn-btn" id="lb11" onclick="lrn(event,11)">&#9734;</button><span class="chevron">&#9660;</span>
     </div>
     <div class="book-content"><div class="content-grid">
-      <div class="content-box"><h3>📖 O čem to je?</h3><p>Harry je sirotek u krutých příbuzných. V 11 letech zjistí, že je čaroděj a nastoupí do školy Bradavice. Najde přátele (Ron, Hermiona) a zjistí, že profesor Quirrell skrývá pod turbanem Voldemorta. Harry ho zastaví a zachrání kouzelný kámen mudrců.</p></div>
-      <div class="content-box"><h3>🧙 Postavy</h3><ul><li><strong>Harry Potter</strong> – sirotek s jizvou blesku, vyvolený</li><li><strong>Ron Weasley</strong> – nejlepší přítel</li><li><strong>Hermiona</strong> – nejchytřejší ze třídy</li><li><strong>Brumbál</strong> – moudrý ředitel</li><li><strong>Voldemort</strong> – zabil Harryho rodiče</li></ul></div>
-      <div class="content-box fw mb"><h3>🎓 Co říct u maturity?</h3><ul><li><strong>Autor:</strong> J. K. Rowling, britská autorka, napsala jako samoživitelka</li><li><strong>Žánr:</strong> Fantasy / Bildungsroman — příběh dospívání, hrdina roste</li><li><strong>Téma:</strong> Přátelství, odvaha, dobro vs. zlo, předsudky</li><li><strong>Přínos:</strong> Nejvíce prodávaná série světa, „vrátila děti ke čtení"</li></ul></div>
-      <div class="content-box qb"><h3>💬 Klíčová myšlenka</h3><p>Harry přežil díky lásce matky — v sérii je láska nejsilnější kouzlo. Silnější než smrt a nenávist.</p></div>
-      <div class="content-box rb fw"><h3>★ Zapamatuj si</h3><ul><li>Rowling = Anglie, 1997, fantasy / Bildungsroman</li><li>Harry = sirotek → Bradavice → poráží Voldemorta</li><li>Téma: dobro vs. zlo, přátelství, odvaha</li><li>Nejprodávanější série světa</li></ul></div>
-    </div><button class="quiz-btn" onclick="openQ(11)">🧠 Otestuj se!</button></div>
-  </div>
-</div>
-
-<div class="era">
-  <div class="era-header"><span class="era-emoji">🇨🇿</span><span class="era-title">Česká literatura 20. a 21. století</span><span class="era-count">10 knih</span></div>
-
+      <div class="content-box"><h3>&#128214; O cem to je?</h3><p>Harry Potter zije u pribuznych, kteri ho nenavidji. Ve 11 letech zjisti, ze je carodej. Nastoupi do Bradavic. Sprateli se s Ronem a Hermionou. Zjisti, ze zly Voldemort zabil jeho rodice a chce kamen mudrucu pro nesmrtelnost. Harry ho zastavi silou lasky matky.</p></div>
+      <div class="content-box"><h3>&#127970; Postavy / klic. body</h3><ul><li><strong>Harry Potter</strong> &ndash; chlapec-carodej, sirotek, hrdina</li><li><strong>Ron Weasley</strong> &ndash; nejlepsi pritel, verny</li><li><strong>Hermiona Grangerova</strong> &ndash; chytra, z mugluv</li><li><strong>Voldemort</strong> &ndash; nejvyssi zlo</li><li><strong>Brumbal</strong> &ndash; reditel, moudry pruvodce</li></ul></div>
+      <div class="content-box fw lt"><h3>&#128218; Literarni teorie + dobovy kontext</h3><div class="lt-grid"><div class="lt-item"><strong>Lit. druh/zanr</strong><span>Epika &mdash; fantasy roman, bildungsroman (roman o dospivani)</span></div><div class="lt-item"><strong>Lit. smer</strong><span>Popularni literatura, fantasy (konec 20. stol.)</span></div><div class="lt-item"><strong>Forma</strong><span>Er-forma, linearni dej, pohled blizky Harrymu</span></div><div class="lt-item"><strong>Vypravec</strong><span>Er-forma (3. os.), pohled tesne u Harryho, vsvedouci</span></div><div class="lt-item"><strong>Dobovy kontext</strong><span>Rowling psala v kavarne v Edinburghu jako samozivitelka. 1. dil vydan 1997. Serie zmenila detskou literaturu a popularizovala cteni po celem svete.</span></div><div class="lt-item"><strong>Dalsi dila autorky</strong><span>Harry Potter (7 dilu), Fantasticka zvirata, Ikabog</span></div></div></div>
+      <div class="content-box fw mb"><h3>&#127891; Co rict u maturity?</h3><ul><li>Rowling = fantasy, bildungsroman (roman o dospivani hrdiny), konec 20. stol.</li><li>Bildungsroman = hrdina roste, uci se, prekonava prekazky, hleda identitu</li><li>Tema: pratelstvi, odvaha, dobro vs. zlo, sila lasky a obeti</li><li>Kulturni prinos: nejvetsi kniznni fenomen konce 20. stol., propagace cteni u deti</li></ul></div>
+      <div class="content-box qb"><h3>&#128172; Klicova myslenka</h3><p>Harryho zachranila laska jeho matky &mdash; nejvetsi kouzel neni kouzlo. Je to obet a laska.</p></div>
+      <div class="content-box rb fw"><h3>&#9733; Zapamatuj si</h3><ul><li>Rowling = fantasy, anglicka literatura, 1997</li><li>Bildungsroman = roman o dospivani hrdiny</li><li>Harry vs. Voldemort = dobro vs. zlo</li><li>Laska matky ho zachranila &mdash; hlavni tema cele serie</li></ul></div>
+    </div><button class="quiz-btn" onclick="openQ(11)">&#129504; Otestuj se!</button></div>
+  </div></div><div class="era">
+  <div class="era-header"><span class="era-emoji">&#127992;</span><span class="era-title">Ceska literatura 20. a 21. stoleti</span><span class="era-count">10 knih</span></div>
   <div class="book-card" id="b12">
     <div class="book-header" onclick="tog(12)">
-      <span class="book-icon">💐</span>
-      <div class="book-info"><div class="book-title">Maminka</div><div class="book-author">Jaroslav Seifert · 1954 · Česko</div><div class="book-tags"><span class="tag">Poezie</span><span class="tag">Lyrika</span><span class="tag">Nobelova cena</span></div></div>
-      <button class="learn-btn" id="lb12" onclick="lrn(event,12)">☆</button><span class="chevron">▼</span>
+      <span class="book-icon">&#127799;</span>
+      <div class="book-info"><div class="book-title">Maminka</div><div class="book-author">Jaroslav Seifert &middot; 1954 &middot; Cesko</div><div class="book-tags"><span class="tag">Poezie</span><span class="tag">Lyrika</span><span class="tag">Poetismus</span></div></div>
+      <button class="learn-btn" id="lb12" onclick="lrn(event,12)">&#9734;</button><span class="chevron">&#9660;</span>
     </div>
     <div class="book-content"><div class="content-grid">
-      <div class="content-box"><h3>📖 O čem to je?</h3><p>Sbírka básní věnovaná Seifertově zemřelé matce. Vzpomínka na dětství v Žižkově — matčiny ruce, vůně, hlas, každodenní starosti. Básně jsou plné tepla, smutku a lásky. Není to jen o jeho matce — je to oslava všech matek světa.</p></div>
-      <div class="content-box"><h3>📝 Klíčové motivy</h3><ul><li>Dětství v pražském Žižkově (dělnická čtvrť)</li><li>Matčiny ruce, teplo domova</li><li>Smutek ze ztráty, vzpomínka jako zachování</li><li>Obyčejný život jako hodný básně</li></ul></div>
-      <div class="content-box fw mb"><h3>🎓 Co říct u maturity?</h3><ul><li><strong>Autor:</strong> Jaroslav Seifert — Nobelova cena za literaturu 1984, jediný Čech!</li><li><strong>Žánr:</strong> Lyrická poezie — intimní, osobní, emocionální</li><li><strong>Téma:</strong> Mateřská láska, vzpomínka, domov, dětství</li><li><strong>Jazyk:</strong> Jednoduchý, čistý, zpěvný</li></ul></div>
-      <div class="content-box qb"><h3>💬 Klíčová myšlenka</h3><p>Seifert zachytil matku ve všedních okamžicích — u plotny, s košíkem. Právě v těchto maličkostech je věčnost a láska.</p></div>
-      <div class="content-box rb fw"><h3>★ Zapamatuj si</h3><ul><li>Seifert = Nobelova cena 1984, JEDINÝ Čech!</li><li>Maminka = sbírka básní o zemřelé matce</li><li>Žižkov, Praha, dělnické prostředí</li><li>Poetismus → pozdně lyrický styl</li></ul></div>
-    </div><button class="quiz-btn" onclick="openQ(12)">🧠 Otestuj se!</button></div>
+      <div class="content-box"><h3>&#128214; O cem to je?</h3><p>Sbirka basni venovana vzpomince na matku. Seifert vzpomina na detstvi na Zizkove, na matcinu peci, lasku a jednoduchost. Basne jsou lyricke, jemne, nostalgicke. Matka je symbol domova, bezpeci a ztracene doby.</p></div>
+      <div class="content-box"><h3>&#127970; Postavy / klic. body</h3><ul><li>Sbirka lyrickych basni &mdash; ne jeden pribeh</li><li>Vzpominky na detstvi v Praze na Zizkove</li><li>Emolcionalni, jemny jazyk</li><li>Matka jako symbol bezpeci a lasky</li></ul></div>
+      <div class="content-box fw lt"><h3>&#128218; Literarni teorie + dobovy kontext</h3><div class="lt-grid"><div class="lt-item"><strong>Lit. druh/zanr</strong><span>Lyrika &mdash; sbirka lyricke poezie</span></div><div class="lt-item"><strong>Lit. smer</strong><span>Poetismus (mezivalecna ceska avantgarda), pozdi tvorba</span></div><div class="lt-item"><strong>Forma</strong><span>Volny vers, melodicka basan, obrazne vyjadreni</span></div><div class="lt-item"><strong>Vypravec</strong><span>Lyricky subjekt (Seifert sam, ich-forma v basnich)</span></div><div class="lt-item"><strong>Dobovy kontext</strong><span>50. leta &mdash; Seifert pise Maминку v dobe stalinismu, jako utek do intimniho sveta. Stal se disnidentem, podepsal Chartu 77. Nobelova cena 1984 &mdash; jediny Cech!</span></div><div class="lt-item"><strong>Dalsi dila autora</strong><span>Na vlnach TSF, Slavik zpiva spatne, Koncert na ostrove, Morovy sloup</span></div></div></div>
+      <div class="content-box fw mb"><h3>&#127891; Co rict u maturity?</h3><ul><li>Seifert = poetismus (mezivalecna avantgarda), pozdeji disident, Nobelova cena 1984</li><li>Lyrika = poezie vyjadrujici subjektivni pocity, vzpominky, emoce</li><li>Poetismus = radost ze zivota, obraznost, hravost jazyka</li><li>Maminka = intimni sbirka, protiklad k oficialni socialist. kulture 50. let</li></ul></div>
+      <div class="content-box qb"><h3>&#128172; Klicova myslenka</h3><p>Matka = domov. Basne nejsou o ni jako o osobe &mdash; ale o pocitu bezpeci a lasky, ktery s sebou nese vzpominka.</p></div>
+      <div class="content-box rb fw"><h3>&#9733; Zapamatuj si</h3><ul><li>Seifert = poetismus, Nobelova cena 1984 (jediny Cech!)</li><li>Lyrika = subjektivni basne, emoce, vzpominky</li><li>Maminka = vzpominky na detstvi na Zizkove</li><li>Disident, podepsal Chartu 77</li></ul></div>
+    </div><button class="quiz-btn" onclick="openQ(12)">&#129504; Otestuj se!</button></div>
   </div>
-
   <div class="book-card" id="b13">
     <div class="book-header" onclick="tog(13)">
-      <span class="book-icon">🌼</span>
-      <div class="book-info"><div class="book-title">Host do domu</div><div class="book-author">Jiří Wolker · 1921 · Česko</div><div class="book-tags"><span class="tag">Poezie</span><span class="tag">Proletářská</span><span class="tag">Avantgarda</span></div></div>
-      <button class="learn-btn" id="lb13" onclick="lrn(event,13)">☆</button><span class="chevron">▼</span>
+      <span class="book-icon">&#128538;</span>
+      <div class="book-info"><div class="book-title">Host do domu</div><div class="book-author">Jiri Wolker &middot; 1921 &middot; Cesko</div><div class="book-tags"><span class="tag">Poezie</span><span class="tag">Proletarske umeni</span><span class="tag">Socialni lyrika</span></div></div>
+      <button class="learn-btn" id="lb13" onclick="lrn(event,13)">&#9734;</button><span class="chevron">&#9660;</span>
     </div>
     <div class="book-content"><div class="content-grid">
-      <div class="content-box"><h3>📖 O čem to je?</h3><p>Wolkerova první sbírka. Mladý básník (zemřel ve 24 letech) hledí na svět s čistotou a láskou. Básně jsou o prostých věcech — dům, chodba, okno, poštovní schránka. Vše je plné naděje. Wolker věřil ve spravedlivější svět pro dělníky.</p></div>
-      <div class="content-box"><h3>📝 Témata</h3><ul><li>Dětská čistota pohledu na svět</li><li>Věci každodenního života jako symboly</li><li>Naděje na lepší svět pro chudé</li><li>Láska k životu i přes jeho těžkost</li><li>Smrt (věděl, že je nemocný TBC)</li></ul></div>
-      <div class="content-box fw mb"><h3>🎓 Co říct u maturity?</h3><ul><li><strong>Autor:</strong> Jiří Wolker, zemřel ve 24 (tuberkulóza), Host do domu 1921</li><li><strong>Žánr:</strong> Proletářská poezie — o dělnících a chudobě s láskou, ne hněvem</li><li><strong>Téma:</strong> Láska k životu, spravedlnost, prostý člověk jako hrdina</li><li><strong>Jazyk:</strong> Čistý, obrazný, přístupný, dětský pohled</li></ul></div>
-      <div class="content-box qb"><h3>💬 Klíčová myšlenka</h3><p>Wolker vidí krásu i v poštovní schránce. Miloval svět, přestože věděl, že ho brzy opustí. Básník, který zemřel příliš brzy.</p></div>
-      <div class="content-box rb fw"><h3>★ Zapamatuj si</h3><ul><li>Wolker = zemřel ve 24 (TBC), avantgarda, 20. léta</li><li>Proletářská poezie = o prostých lidech s láskou</li><li>Host do domu = první sbírka 1921</li><li>Styl: čistý, dětský pohled, radost z malých věcí</li></ul></div>
-    </div><button class="quiz-btn" onclick="openQ(13)">🧠 Otestuj se!</button></div>
+      <div class="content-box"><h3>&#128214; O cem to je?</h3><p>Prvni sbirka basni Jiriho Wolkera. Basne o prostych vecech &mdash; pokoj, postel, hodiny, srdce. Pohled na svet ocima dobreho, naivne duverjiveho mladika. Svet je plny lasky a dobra. Pozdejsi tvorba je socialan si (trpici delnici), ale Host je nevinny a krasny.</p></div>
+      <div class="content-box"><h3>&#127970; Postavy / klic. body</h3><ul><li>Basne o kazdodennich vecech</li><li>Pohled naivniho, dobreho mladiho cloveka</li><li>Veci mluvji, maji dusi (personifikace)</li><li>Radost z existence, vira v dobro sveta</li></ul></div>
+      <div class="content-box fw lt"><h3>&#128218; Literarni teorie + dobovy kontext</h3><div class="lt-grid"><div class="lt-item"><strong>Lit. druh/zanr</strong><span>Lyrika &mdash; sbirka basni (intimni, socialni)</span></div><div class="lt-item"><strong>Lit. smer</strong><span>Proletarske umeni, ceska mezivalecna avantgarda</span></div><div class="lt-item"><strong>Forma</strong><span>Volny vers, rymovane basne, personifikace veci</span></div><div class="lt-item"><strong>Vypravec</strong><span>Lyricky subjekt &mdash; mlady idealisticky basnik</span></div><div class="lt-item"><strong>Dobovy kontext</strong><span>Pocatek 20. let &mdash; po 1. svetove valce, vznik Ceskoslovenska (1918). Wolker zemrel na TBC ve 24 letech (1924). Kratkicky zivot, silny odkaz.</span></div><div class="lt-item"><strong>Dalsi dila autora</strong><span>Tezka hodina (druha sbirka, socialanejsi), Balada o ocich topicovych</span></div></div></div>
+      <div class="content-box fw mb"><h3>&#127891; Co rict u maturity?</h3><ul><li>Wolker = proletarske umeni, ceska mezivalecna avantgarda, zemrel ve 24 letech</li><li>Lyrika = subjektivni basne &mdash; Host do domu = intimni, optimisticka sbirka</li><li>Proletarske umeni = solidarita s delniky, socialni temata (vice v Tezke hodine)</li><li>Styl: veci maji dusi, personifikace, naivni pohled = svet je dobry</li></ul></div>
+      <div class="content-box qb"><h3>&#128172; Klicova myslenka</h3><p>Svet je plny hostu &mdash; kazdy clovek, kazda vec je hostem, a my je mame vitat s laskou. Optimismus mladosti.</p></div>
+      <div class="content-box rb fw"><h3>&#9733; Zapamatuj si</h3><ul><li>Wolker = proletarske umeni, zemrel ve 24 na TBC</li><li>Host do domu = intimni basne, veci maji dusi</li><li>Personifikace = veci mluvji a citji</li><li>Mezivalecna ceska avantgarda, po vzniku CSR</li></ul></div>
+    </div><button class="quiz-btn" onclick="openQ(13)">&#129504; Otestuj se!</button></div>
   </div>
-
   <div class="book-card" id="b14">
     <div class="book-header" onclick="tog(14)">
-      <span class="book-icon">🦎</span>
-      <div class="book-info"><div class="book-title">Válka s mloky</div><div class="book-author">Karel Čapek · 1936 · Česko</div><div class="book-tags"><span class="tag">Román</span><span class="tag">Sci-fi satira</span><span class="tag">Meziválečná</span></div></div>
-      <button class="learn-btn" id="lb14" onclick="lrn(event,14)">☆</button><span class="chevron">▼</span>
+      <span class="book-icon">&#129422;</span>
+      <div class="book-info"><div class="book-title">Valka s mloky</div><div class="book-author">Karel Capek &middot; 1936 &middot; Cesko</div><div class="book-tags"><span class="tag">Roman</span><span class="tag">Satira</span><span class="tag">Sci-fi</span></div></div>
+      <button class="learn-btn" id="lb14" onclick="lrn(event,14)">&#9734;</button><span class="chevron">&#9660;</span>
     </div>
     <div class="book-content"><div class="content-grid">
-      <div class="content-box"><h3>📖 O čem to je?</h3><p>Lidé objeví inteligentní mloky pod vodou. Využívají je jako levnou pracovní sílu. Mloci se učí, získají zbraně a techniku. Postupně se obrátí proti lidům — začnou zatápět pevniny. Satira na fašismus, kolonialismus a lidskou chamtivost.</p></div>
-      <div class="content-box"><h3>🌊 Symbolika</h3><ul><li>Mloci = utlačovaná menšina / fašistické masy</li><li>Lidé = kolonizátoři, kapitalismus</li><li>Čapek: co dnes utlačuješ, zítra tě zničí</li><li>Psáno 1936 = 3 roky před 2. světovou válkou</li></ul></div>
-      <div class="content-box fw mb"><h3>🎓 Co říct u maturity?</h3><ul><li><strong>Autor:</strong> Karel Čapek, největší český meziválečný spisovatel, demokrat, přítel Masaryka</li><li><strong>Žánr:</strong> Satirický sci-fi román — fantastika jako kritika skutečnosti</li><li><strong>Téma:</strong> Varování před fašismem, kolonialismem, chamtivostí</li><li><strong>Přínos:</strong> Napsáno 1936 — Čapek byl prorokem Hitlerovy expanze</li></ul></div>
-      <div class="content-box qb"><h3>💬 Klíčová myšlenka</h3><p>„Člověk vytvoří to, co ho nakonec zničí." Mloci jsou produktem lidské chamtivosti — a lidstvo za to zaplatí.</p></div>
-      <div class="content-box rb fw"><h3>★ Zapamatuj si</h3><ul><li>Čapek = meziválečná literatura, demokrat, anti-fašista</li><li>Mloci = pracovní síla → povstanou a zatopí svět</li><li>Satirické sci-fi = varování skryté do fantastiky</li><li>1936 = varování před Hitlerem</li></ul></div>
-    </div><button class="quiz-btn" onclick="openQ(14)">🧠 Otestuj se!</button></div>
+      <div class="content-box"><h3>&#128214; O cem to je?</h3><p>Kapitan van Toch objevi inteligentni mloky. Lide je zacnou vyuzivat jako levnou pracovni silu. Mloci se naucji od lidi vse &mdash; i zbrojit. Nakonec mloci zacnou nicit pevniny, aby meli vice more. Svet se topi. Alegorie na to, jak si lide sami vytvorijiji vlastni zkazu.</p></div>
+      <div class="content-box"><h3>&#127970; Postavy / klic. body</h3><ul><li><strong>Kapitan van Toch</strong> &ndash; objevi mloky, chce z nich pracovniky</li><li><strong>G. H. Bondy</strong> &ndash; cesky kapitalista, financuje vyuzivani mloky</li><li><strong>Chief Salamander</strong> &ndash; vudce mloky</li><li><strong>Mloci</strong> &ndash; alegoricka postava</li></ul></div>
+      <div class="content-box fw lt"><h3>&#128218; Literarni teorie + dobovy kontext</h3><div class="lt-grid"><div class="lt-item"><strong>Lit. druh/zanr</strong><span>Epika &mdash; satiricky sci-fi roman</span></div><div class="lt-item"><strong>Lit. smer</strong><span>Demokraticky humanismus, ceska mezivalecna proza</span></div><div class="lt-item"><strong>Forma</strong><span>Er-forma, mozaikova kompozice (novinove utrzky, dialogy, dokumenty), 3 casti</span></div><div class="lt-item"><strong>Vypravec</strong><span>Er-forma + ruzni vypraveci (dokumentarni styl, imitace novin)</span></div><div class="lt-item"><strong>Dobovy kontext</strong><span>1936 &mdash; fasizmus v Nemecku, ohrozeni demokracie. Capek varuje: co utlacujete a vyuzivate, jednou vas znici. Zemrel 1938, mesice po Mnichovu.</span></div><div class="lt-item"><strong>Dalsi dila autora</strong><span>R.U.R., Bila nemoc, Matka, Povidky z jedne a druhe kapsy, Vec Makropulos</span></div></div></div>
+      <div class="content-box fw mb"><h3>&#127891; Co rict u maturity?</h3><ul><li>Capek = demokraticky humanismus, mezivalecna proza, varoval pred fasizmem</li><li>Satiricky sci-fi roman = fantasticiy pribeh s realnym poselstvim</li><li>Alegorie: mloci = utlacovana trida/narod, ktery se vzepre</li><li>Mozaikova kompozice = novinove zpravy, dokumenty, dialogy &mdash; imituje realitu</li></ul></div>
+      <div class="content-box qb"><h3>&#128172; Klicova myslenka</h3><p>Co dnes utlacujes a vyuzivas, zitra te znici. Capek psal o fasizmu, kolonializmu, kapitalizmu &mdash; najednou.</p></div>
+      <div class="content-box rb fw"><h3>&#9733; Zapamatuj si</h3><ul><li>Capek = humanismus, varoval pred totalitou, 30. leta</li><li>Mloci = alegorie na utlacovane, kteri se vzeprou</li><li>Mozaikova kompozice = noviny, dokumenty, ruzni vypraveci</li><li>Satiricky sci-fi roman s politickym poselstvim</li></ul></div>
+    </div><button class="quiz-btn" onclick="openQ(14)">&#129504; Otestuj se!</button></div>
   </div>
-
   <div class="book-card" id="b15">
     <div class="book-header" onclick="tog(15)">
-      <span class="book-icon">🤖</span>
-      <div class="book-info"><div class="book-title">R.U.R.</div><div class="book-author">Karel Čapek · 1921 · Česko</div><div class="book-tags"><span class="tag">Divadlo</span><span class="tag">Sci-fi</span><span class="tag">Vynalezl slovo ROBOT</span></div></div>
-      <button class="learn-btn" id="lb15" onclick="lrn(event,15)">☆</button><span class="chevron">▼</span>
+      <span class="book-icon">&#129302;</span>
+      <div class="book-info"><div class="book-title">R.U.R.</div><div class="book-author">Karel Capek &middot; 1920 &middot; Cesko</div><div class="book-tags"><span class="tag">Drama</span><span class="tag">Sci-fi</span><span class="tag">Antiutopie</span></div></div>
+      <button class="learn-btn" id="lb15" onclick="lrn(event,15)">&#9734;</button><span class="chevron">&#9660;</span>
     </div>
     <div class="book-content"><div class="content-grid">
-      <div class="content-box"><h3>📖 O čem to je?</h3><p>Továrna vyrábí roboty — umělé bytosti, které pracují místo lidí. Lidé přestanou pracovat a ztratí smysl. Roboti se vzbouří a zabijí téměř všechny lidi. Zbyde jen Alquist. Dva roboti se do sebe zamilují — a vznikne naděje na nový začátek.</p></div>
-      <div class="content-box"><h3>🔧 Postavy</h3><ul><li><strong>Harry Domin</strong> – ředitel továrny, věří v pokrok</li><li><strong>Helena Glory</strong> – chce osvobodit roboty</li><li><strong>Alquist</strong> – jediný přeživší člověk</li><li><strong>Primus a Helena</strong> – roboti, kteří se zamilují</li></ul></div>
-      <div class="content-box fw mb"><h3>🎓 Co říct u maturity?</h3><ul><li><strong>Autor:</strong> Karel Čapek — vynalezl slovo ROBOT (z čes. „robota" = dřina)!</li><li><strong>Žánr:</strong> Sci-fi drama — první velké sci-fi divadlo světa</li><li><strong>Téma:</strong> Nebezpečí pokroku bez etiky, co dělá člověka člověkem</li><li><strong>Přínos:</strong> Slovo „robot" vstoupilo do všech světových jazyků z tohoto díla!</li></ul></div>
-      <div class="content-box qb"><h3>💬 Klíčová myšlenka</h3><p>Pokud nahradíme lidskou duši stroji, zničíme sami sebe. Ale láska přetrvá — roboti jsou nakonec lidštější než lidé, kteří je stvořili.</p></div>
-      <div class="content-box rb fw"><h3>★ Zapamatuj si</h3><ul><li>Čapek vynalezl slovo ROBOT — z tohoto díla!</li><li>Roboti pracují → lidé zahálí → roboti se vzbouří</li><li>Zbyde Alquist + dva zamilovaní roboti</li><li>Téma: technika bez etiky = zkáza</li></ul></div>
-    </div><button class="quiz-btn" onclick="openQ(15)">🧠 Otestuj se!</button></div>
+      <div class="content-box"><h3>&#128214; O cem to je?</h3><p>Rossumovi Univerzalni Roboti vyrabji umele lidi (roboty) jako levnou pracovni silu. Roboti pracuji misto lidi. Lide prstanou pracovat, prestanuji se i mnozit. Roboti se vzbourrji a vyvradziji lidstvo &mdash; az na jednoho. Nakonec dva roboti zacnou citit lasku &mdash; novy Adam a Eva.</p></div>
+      <div class="content-box"><h3>&#127970; Postavy / klic. body</h3><ul><li><strong>Harry Domin</strong> &ndash; reditel tovarny, optimista</li><li><strong>Helena Gloryova</strong> &ndash; chce dat robotum prava</li><li><strong>Radius</strong> &ndash; vudce robotuv vzpoury</li><li><strong>Alquist</strong> &ndash; jediny prezijivajici clovek</li><li><strong>Primus &amp; Helena</strong> &ndash; roboti, kteri se zamiluji</li></ul></div>
+      <div class="content-box fw lt"><h3>&#128218; Literarni teorie + dobovy kontext</h3><div class="lt-grid"><div class="lt-item"><strong>Lit. druh/zanr</strong><span>Drama &mdash; sci-fi divadelni hra, antiutopie</span></div><div class="lt-item"><strong>Lit. smer</strong><span>Demokraticky humanismus, mezivalecna ceska drama</span></div><div class="lt-item"><strong>Forma</strong><span>Divadelni hra (proza), 3 dejstvi + epilog</span></div><div class="lt-item"><strong>Vypravec</strong><span>Neni &mdash; drama, pouze dialogy postav</span></div><div class="lt-item"><strong>Dobovy kontext</strong><span>1920 &mdash; po 1. svetove valce, prumyslova revoluce, strach z techniky. Capek vynalezl slovo ROBOT (z cestiny: robota = drina). Dnes je slovo robot ve vsech jazycich sveta.</span></div><div class="lt-item"><strong>Dalsi dila autora</strong><span>Valka s mloky, Bila nemoc, Matka, Vec Makropulos</span></div></div></div>
+      <div class="content-box fw mb"><h3>&#127891; Co rict u maturity?</h3><ul><li>Capek vynalezl slovo ROBOT &mdash; dnes ve vsech svetovych jazycich!</li><li>R.U.R. = Rossumovi Univerzalni Roboti &mdash; antiutopicka sci-fi hra</li><li>Tema: co se stane, kdyz stroje nahradjici lidi? Co je lidskost?</li><li>Dobovy kontext: 1920, strach z industrializace, otazka hranic techniky</li></ul></div>
+      <div class="content-box qb"><h3>&#128172; Klicova myslenka</h3><p>Kdyz odejmeme lidem praci, odejmeme jim smysl. A roboti, kteri maji vse, ale ne city, se nakonec nauci milovat &mdash; a tim se stanou lidmi.</p></div>
+      <div class="content-box rb fw"><h3>&#9733; Zapamatuj si</h3><ul><li>Capek = vynalezl slovo ROBOT (1920)!</li><li>Roboti = umeli delnici &rarr; vzpoura &rarr; vyvradziji lidstvo</li><li>Antiutopie = varujici vize budoucnosti</li><li>Epilog: dva roboti se zamiluji = nadeje (novy Adam a Eva)</li></ul></div>
+    </div><button class="quiz-btn" onclick="openQ(15)">&#129504; Otestuj se!</button></div>
   </div>
-
   <div class="book-card" id="b16">
     <div class="book-header" onclick="tog(16)">
-      <span class="book-icon">🦌</span>
-      <div class="book-info"><div class="book-title">Smrt krásných srnců</div><div class="book-author">Ota Pavel · 1971 · Česko</div><div class="book-tags"><span class="tag">Povídky</span><span class="tag">Autobiografie</span><span class="tag">Holokaust</span></div></div>
-      <button class="learn-btn" id="lb16" onclick="lrn(event,16)">☆</button><span class="chevron">▼</span>
+      <span class="book-icon">&#129420;</span>
+      <div class="book-info"><div class="book-title">Smrt krasnych srncu</div><div class="book-author">Ota Pavel &middot; 1971 &middot; Cesko</div><div class="book-tags"><span class="tag">Povidky</span><span class="tag">Autobiografie</span><span class="tag">Humor</span></div></div>
+      <button class="learn-btn" id="lb16" onclick="lrn(event,16)">&#9734;</button><span class="chevron">&#9660;</span>
     </div>
     <div class="book-content"><div class="content-grid">
-      <div class="content-box"><h3>📖 O čem to je?</h3><p>Skutečné vzpomínky Oty Pavla na dětství. Otec Leo byl Žid — vtipný obchodník. Příběhy jsou o rybaření, přírodě, rodině. Za 2. světové války rodinu postihne holokaust. Přesto jsou povídky plné lásky a humoru, ne nenávisti.</p></div>
-      <div class="content-box"><h3>🐟 Klíčové motivy</h3><ul><li>Otec Leo = legendární postava, vždy vymyslí řešení</li><li>Rybaření = symbol svobody a útočiště</li><li>Příroda Berounska = milovaný domov</li><li>Holokaust přichází pomalu, nenápadně</li><li>Humor jako obrana před bolestí</li></ul></div>
-      <div class="content-box fw mb"><h3>🎓 Co říct u maturity?</h3><ul><li><strong>Autor:</strong> Ota Pavel (Otto Popper), sportovní novinář, zemřel v 43 (duševní choroba)</li><li><strong>Žánr:</strong> Autobiografické povídky</li><li><strong>Téma:</strong> Dětství, rodina, holokaust viděný dítětem, zachování lidskosti</li><li><strong>Jazyk:</strong> Poetický, vtipný, laskavý — o strašných věcech s láskou</li><li><strong>Přínos:</strong> Nejsilnější česká próza o holokaustu dětskýma očima</li></ul></div>
-      <div class="content-box qb"><h3>💬 Klíčová myšlenka</h3><p>I v dobách hrůzy lidé žili, milovali, rybařili. To nás nezmenšuje — naopak, to nás drží při životě.</p></div>
-      <div class="content-box rb fw"><h3>★ Zapamatuj si</h3><ul><li>Ota Pavel = Žid, dětství za 2. sv. války, novinář</li><li>Otec Leo = klíčová postava, vtipný obchodník</li><li>Rybaření, příroda = svoboda uprostřed hrůzy</li><li>Autobiografické povídky = skutečné vzpomínky</li></ul></div>
-    </div><button class="quiz-btn" onclick="openQ(16)">🧠 Otestuj se!</button></div>
+      <div class="content-box"><h3>&#128214; O cem to je?</h3><p>Autobiograficke povidky o otci Leonovi &mdash; Zidu, vynalezavem obchodnikovi a rybarovi. Odeheravaji se za 2. svetove valky, kdy bylo rodine jako zidovske odnaTo vse &mdash; mimo hlavy. Otec vzdy najde reseni. Plne humoru a lasky, prestoze jde o valku a holocaust.</p></div>
+      <div class="content-box"><h3>&#127970; Postavy / klic. body</h3><ul><li><strong>Leo Pavel</strong> &ndash; otec, vynalezavy, optimisticky Zid</li><li><strong>Ota Pavel</strong> &ndash; syn, vypravec (dite v dobe valky)</li><li><strong>Kapr Frantik</strong> &ndash; v nejznamejsi povidce</li></ul></div>
+      <div class="content-box fw lt"><h3>&#128218; Literarni teorie + dobovy kontext</h3><div class="lt-grid"><div class="lt-item"><strong>Lit. druh/zanr</strong><span>Epika &mdash; cyklus autobiografickych povidek</span></div><div class="lt-item"><strong>Lit. smer</strong><span>Ceska proza 60.-70. let, vzpominkova literatura</span></div><div class="lt-item"><strong>Forma</strong><span>Ich-forma (Ota jako dite), hovorovy jazyk, humor a nostalgie</span></div><div class="lt-item"><strong>Vypravec</strong><span>Ich-forma &mdash; Ota sam (pohled ditete/syna)</span></div><div class="lt-item"><strong>Dobovy kontext</strong><span>Protektorat Cechy a Morava (1939-45), holocaust. Pavel byl Zid. Bratri sli do koncentracniho tabora. Pavel psal tuto knihu po psychickem zhrouceni &mdash; jako terapii. Zemrel 1973.</span></div><div class="lt-item"><strong>Dalsi dila autora</strong><span>Pohadka o Raskovi, Jak jsem potkal ryby, Zlati uhori</span></div></div></div>
+      <div class="content-box fw mb"><h3>&#127891; Co rict u maturity?</h3><ul><li>Pavel = autobiograficka proza, holocaust, ceska lit. 60.-70. let</li><li>Cyklus povidek = serie propojenych pribehu (ne roman)</li><li>Ich-forma &mdash; Ota sam jako vypravec, detsky pohled dodava nevinnost</li><li>Tema: preziti holocaustu silou humoru, rodinnne lasky a vynalezavosti</li></ul></div>
+      <div class="content-box qb"><h3>&#128172; Klicova myslenka</h3><p>Humor a laska k zivotu jsou silnejsi nez valka. Otec Leo nikdy neztratil nadeji &mdash; a to rodinu zachranilo.</p></div>
+      <div class="content-box rb fw"><h3>&#9733; Zapamatuj si</h3><ul><li>Pavel = autobiograficke povidky, holocaust, Zid</li><li>Otec Leo = legendarni postava, vynalezavy optimista</li><li>Ich-forma, detsky pohled na valku a holocaust</li><li>Humor i pres tezke tema &mdash; to je Pavluv rukopis</li></ul></div>
+    </div><button class="quiz-btn" onclick="openQ(16)">&#129504; Otestuj se!</button></div>
   </div>
-
   <div class="book-card" id="b17">
     <div class="book-header" onclick="tog(17)">
-      <span class="book-icon">🐕</span>
-      <div class="book-info"><div class="book-title">Báječná léta pod psa</div><div class="book-author">Michal Viewegh · 1992 · Česko</div><div class="book-tags"><span class="tag">Román</span><span class="tag">Humor</span><span class="tag">Normalizace</span></div></div>
-      <button class="learn-btn" id="lb17" onclick="lrn(event,17)">☆</button><span class="chevron">▼</span>
+      <span class="book-icon">&#128250;</span>
+      <div class="book-info"><div class="book-title">Bajecna leta pod psa</div><div class="book-author">Michal Viewegh &middot; 1992 &middot; Cesko</div><div class="book-tags"><span class="tag">Roman</span><span class="tag">Ironie</span><span class="tag">Normalizace</span></div></div>
+      <button class="learn-btn" id="lb17" onclick="lrn(event,17)">&#9734;</button><span class="chevron">&#9660;</span>
     </div>
     <div class="book-content"><div class="content-grid">
-      <div class="content-box"><h3>📖 O čem to je?</h3><p>Humorný autobiografický román o dospívání za normalizace (70.-80. léta). Kvido vypráví o své rodině — intelektuálním otci, který odmítá spolupracovat s komunisty. Rodina je za to trestána, musí na venkov. Vše je ale podáno s humorem a ironií. Končí Sametovou revolucí 1989.</p></div>
-      <div class="content-box"><h3>👨‍👩‍👦 Postavy</h3><ul><li><strong>Kvido</strong> – vypravěč, alter ego autora</li><li><strong>Otec</strong> – intelektuál, vzdoruje režimu</li><li><strong>Matka</strong> – drží rodinu pohromadě</li><li>Normalizace = šedá doba 70.-80. let</li></ul></div>
-      <div class="content-box fw mb"><h3>🎓 Co říct u maturity?</h3><ul><li><strong>Autor:</strong> Michal Viewegh, nejpopulárnější český autor 90. let</li><li><strong>Žánr:</strong> Humoristický román — ironie, nadsázka, sebeironický vypravěč</li><li><strong>Téma:</strong> Dospívání za komunismu, vzdor proti systému</li><li><strong>Přínos:</strong> Nejčtenější česká próza 90. let, přeložena do desítek jazyků</li></ul></div>
-      <div class="content-box qb"><h3>💬 Klíčová myšlenka</h3><p>I „pod psa" — v době komunismu — se dalo žít, milovat a smát. Viewegh ukazuje, že šedivé doby mají barevné lidi.</p></div>
-      <div class="content-box rb fw"><h3>★ Zapamatuj si</h3><ul><li>Viewegh = 90. léta, humor, normalizace</li><li>Kvido = dospívání za komunismu</li><li>Normalizace (70.-80. léta) = šedá doba po Pražském jaru</li><li>Humoristický román = ironie, nadsázka, autobiografie</li></ul></div>
-    </div><button class="quiz-btn" onclick="openQ(17)">🧠 Otestuj se!</button></div>
+      <div class="content-box"><h3>&#128214; O cem to je?</h3><p>Pribeh rodiny Kilianu v dobe normalizace (70.-80. leta). Otec je outsider a snillek. Prestehujici se na venkov. Syn dospiva, resi lasku, skolu, komunismus. Vse s ironii a humorem. Romanova saga od Prazskeho jara 1968 po Sametovou revoluci 1989.</p></div>
+      <div class="content-box"><h3>&#127970; Postavy / klic. body</h3><ul><li><strong>Kvido</strong> &ndash; syn, vypravec, ironicky pozorovatel</li><li><strong>Otec</strong> &ndash; snillek, outsider v normalizaci</li><li><strong>Matka</strong> &ndash; prakticka, terpi otcovym snilkovstvim</li></ul></div>
+      <div class="content-box fw lt"><h3>&#128218; Literarni teorie + dobovy kontext</h3><div class="lt-grid"><div class="lt-item"><strong>Lit. druh/zanr</strong><span>Epika &mdash; ironicky roman, rodinna saga</span></div><div class="lt-item"><strong>Lit. smer</strong><span>Ceska proza 90. let, postmoderni prvky</span></div><div class="lt-item"><strong>Forma</strong><span>Er-forma + ich-forma (Kvido), linearni dej, ironie a intertextualita</span></div><div class="lt-item"><strong>Vypravec</strong><span>Kvido &mdash; er-forma i ich-forma, ironicky, sebereflexivni</span></div><div class="lt-item"><strong>Dobovy kontext</strong><span>Normalizace = seda doba po potlaceni Prazskeho jara 1968. Lide museli predstirat loajalitu komunismu. Roman vysel 1992 &mdash; hned po Sametove revoluci.</span></div><div class="lt-item"><strong>Dalsi dila autora</strong><span>Vychova divek v Cechach, Ucastnici zajezdu, Lekce tvurciho psani</span></div></div></div>
+      <div class="content-box fw mb"><h3>&#127891; Co rict u maturity?</h3><ul><li>Viewegh = ceska proza 90. let, ironicky pohled na normalizaci</li><li>Normalizace = 1969-1989, doba po Prazsem jaru, sediva era</li><li>Ironie = nastroj preziti v totalite &mdash; smiichem se da rict pravda</li><li>Rodinana saga = pribeh rodiny pres historicke udalosti</li></ul></div>
+      <div class="content-box qb"><h3>&#128172; Klicova myslenka</h3><p>V normalizaci se dalo prezit jen s humorem. Viewegh ukazuje, ze bajecna leta vubec nebyla bajecna &mdash; ale byl to zivot.</p></div>
+      <div class="content-box rb fw"><h3>&#9733; Zapamatuj si</h3><ul><li>Viewegh = ceska proza 90. let, ironie, normalizace</li><li>Normalizace = 1969-1989, po Prazsem jaru</li><li>Kvido = ironicky vypravec, dospiva v komunismu</li><li>Rodinana saga od 1968 do Sametove revoluce 1989</li></ul></div>
+    </div><button class="quiz-btn" onclick="openQ(17)">&#129504; Otestuj se!</button></div>
   </div>
-
   <div class="book-card" id="b18">
     <div class="book-header" onclick="tog(18)">
-      <span class="book-icon">📒</span>
-      <div class="book-info"><div class="book-title">Vyšetřování ztráty třídní knihy</div><div class="book-author">Smoljak & Svěrák · 1967 · Česko</div><div class="book-tags"><span class="tag">Divadlo</span><span class="tag">Absurdní komedie</span><span class="tag">Cimrman</span></div></div>
-      <button class="learn-btn" id="lb18" onclick="lrn(event,18)">☆</button><span class="chevron">▼</span>
+      <span class="book-icon">&#128203;</span>
+      <div class="book-info"><div class="book-title">Vysetrovani ztrary tridni knihy</div><div class="book-author">Smoljak & Sverak &middot; 1967 &middot; Cesko</div><div class="book-tags"><span class="tag">Divadlo</span><span class="tag">Absurdni komedie</span><span class="tag">Cimrman</span></div></div>
+      <button class="learn-btn" id="lb18" onclick="lrn(event,18)">&#9734;</button><span class="chevron">&#9660;</span>
     </div>
     <div class="book-content"><div class="content-grid">
-      <div class="content-box"><h3>📖 O čem to je?</h3><p>Hra Divadla Járy Cimrmana. Na škole zmizí třídní kniha. Učitel zahájí vyšetřování, žáci vypovídají jeden po druhém. Každý má alibi, každý podezírá jiného. Je to absurdní detektivka s hlubokým humorem. Celé „vyšetřování" nic nevyřeší — a to je pointa.</p></div>
-      <div class="content-box"><h3>🎭 Kontext</h3><ul><li>Divadlo Jára Cimrman = legendární české divadlo od 1966</li><li>Cimrman = fiktivní český génius (nikdy neexistoval!)</li><li>Hra: seminář + vlastní divadelní hra</li><li>Humor z byrokracie a lidských malostí</li></ul></div>
-      <div class="content-box fw mb"><h3>🎓 Co říct u maturity?</h3><ul><li><strong>Autoři:</strong> Smoljak + Svěrák, Divadlo Járy Cimrmana od 1966</li><li><strong>Žánr:</strong> Absurdní komedie / groteska</li><li><strong>Téma:</strong> Byrokratická absurdita, lidská malost, humor z každodennosti</li><li><strong>Přínos:</strong> Divadlo Cimrman = 9× nejoblíbenější divadlo ČR v anketě</li></ul></div>
-      <div class="content-box qb"><h3>💬 Klíčová myšlenka</h3><p>Cimrmanovský humor: lidé jsou malí, systém absurdní — a my se z toho nezbláznime. Smějeme se tomu. Typicky česká strategie přežití.</p></div>
-      <div class="content-box rb fw"><h3>★ Zapamatuj si</h3><ul><li>Smoljak + Svěrák = Divadlo Cimrmana, od 1966</li><li>Jára Cimrman = fiktivní český génius</li><li>Absurdní komedie = humor z byrokracie</li><li>Specificky česky: ironie, deadpan, sebeironie</li></ul></div>
-    </div><button class="quiz-btn" onclick="openQ(18)">🧠 Otestuj se!</button></div>
+      <div class="content-box"><h3>&#128214; O cem to je?</h3><p>Ztratila se tridni kniha. Reditel vola vysetrovani &mdash; ale vyslech pripomina absurdni soud. Zaci jsou obvineni za veci, ktere nedavaji smysl. Byrokraticky chaos prevysis zdravy rozum. Hra je pricitana fiktivnimu geniovi Jarovi Cimrmanovi.</p></div>
+      <div class="content-box"><h3>&#127970; Postavy / klic. body</h3><ul><li>Jara Cimrman = fiktivni cesky genius &mdash; nikdy neexistoval!</li><li>Smoljak + Sverak ho vymysleli 1966 pro rozhlasovy porad</li><li>Divadlo Jary Cimrmana = legendarni divadlo dodnes</li><li>Humor: ceska ironie, byrokracie, absurdno</li></ul></div>
+      <div class="content-box fw lt"><h3>&#128218; Literarni teorie + dobovy kontext</h3><div class="lt-grid"><div class="lt-item"><strong>Lit. druh/zanr</strong><span>Drama &mdash; absurdni komedie</span></div><div class="lt-item"><strong>Lit. smer</strong><span>Ceska absurdni drama, 60. leta</span></div><div class="lt-item"><strong>Forma</strong><span>Divadelni hra, seminar + hra (dvoucaastova struktura)</span></div><div class="lt-item"><strong>Vypravec</strong><span>Neni &mdash; divadlo; seminristi uvozuji hru jako badatele</span></div><div class="lt-item"><strong>Dobovy kontext</strong><span>60. leta = Prazske jaro, uvolneni. Absurdni drama = Beckett, Ionesco ve svete; Havel, Smoljak/Sverak v Cechach. Satira na byrokraticky komunismus.</span></div><div class="lt-item"><strong>Dalsi dila autoru</strong><span>Vrazda v salonnim coupe, Zaskok, Dobyti severniho polu</span></div></div></div>
+      <div class="content-box fw mb"><h3>&#127891; Co rict u maturity?</h3><ul><li>Smoljak + Sverak = Divadlo Jary Cimrmana, od 1966/1967</li><li>Absurdni drama = humor z nesmyslnosti systemu, byrokracie, paradoxu</li><li>Cimrman = fiktivni postava &mdash; nikdy neexistoval, ale chova se jako nejvetsi Cech</li><li>Satira na totalitni byrokraticky system v Cechach</li></ul></div>
+      <div class="content-box qb"><h3>&#128172; Klicova myslenka</h3><p>Byrokraticky system je tak absurdni, ze ze ztrary tridni knihy udela statni krizi. Smich jako zbran proti systemu.</p></div>
+      <div class="content-box rb fw"><h3>&#9733; Zapamatuj si</h3><ul><li>Smoljak + Sverak = Divadlo Cimrmana, od 1966</li><li>Jara Cimrman = fiktivni cesky genius (NIKDY NEEXISTOVAL!)</li><li>Absurdni komedie = humor z byrokratickeho nesmyslu</li><li>Satira na komunisticky system v Cechach</li></ul></div>
+    </div><button class="quiz-btn" onclick="openQ(18)">&#129504; Otestuj se!</button></div>
   </div>
-
   <div class="book-card" id="b19">
     <div class="book-header" onclick="tog(19)">
-      <span class="book-icon">🎪</span>
-      <div class="book-info"><div class="book-title">Osel a stín</div><div class="book-author">Voskovec & Werich · 1933 · Česko</div><div class="book-tags"><span class="tag">Divadlo</span><span class="tag">Satira</span><span class="tag">Osvobozené divadlo</span></div></div>
-      <button class="learn-btn" id="lb19" onclick="lrn(event,19)">☆</button><span class="chevron">▼</span>
+      <span class="book-icon">&#127914;</span>
+      <div class="book-info"><div class="book-title">Osel a stin</div><div class="book-author">Voskovec & Werich &middot; 1933 &middot; Cesko</div><div class="book-tags"><span class="tag">Divadlo</span><span class="tag">Satira</span><span class="tag">Osvobozene divadlo</span></div></div>
+      <button class="learn-btn" id="lb19" onclick="lrn(event,19)">&#9734;</button><span class="chevron">&#9660;</span>
     </div>
     <div class="book-content"><div class="content-grid">
-      <div class="content-box"><h3>📖 O čem to je?</h3><p>Komedie v starověkém Řecku. Muž si pronajme osla. V horku si sedne do stínu osla. Vznikne spor: pronajal si stín taky? Z malého sporu se stane soudní případ, pak politická aféra — celé město se rozdělí. Satira na demagogy a lidskou hloupost.</p></div>
-      <div class="content-box"><h3>🎭 Kontext</h3><ul><li>Osvobozené divadlo V+W = legendární meziválečné divadlo</li><li>Satirizovali fašismus v době, kdy Hitler vládl</li><li>Stín osla = malý problém = velký politický boj</li><li>1938: museli emigrovat do USA</li></ul></div>
-      <div class="content-box fw mb"><h3>🎓 Co říct u maturity?</h3><ul><li><strong>Autoři:</strong> Jiří Voskovec + Jan Werich, Osvobozené divadlo Praha, 30. léta</li><li><strong>Žánr:</strong> Satirická politická komedie — humor jako zbraň proti totalitě</li><li><strong>Téma:</strong> Politická demagogie, jak z ničeho vznikne válka</li><li><strong>Přínos:</strong> V+W = géniové české meziválečné kultury, varovali humorem</li></ul></div>
-      <div class="content-box qb"><h3>💬 Klíčová myšlenka</h3><p>Spor o stín osla = politici z malicherností dělají velké konflikty. Lidi přesvědčí bojovat za věci, které jim nic nedají.</p></div>
-      <div class="content-box rb fw"><h3>★ Zapamatuj si</h3><ul><li>Voskovec + Werich = Osvobozené divadlo, 30. léta</li><li>Satirizovali fašismus → museli emigrovat do USA</li><li>Ze sporu o stín osla → politická katastrofa</li><li>Humor jako odpor proti totalitě</li></ul></div>
-    </div><button class="quiz-btn" onclick="openQ(19)">🧠 Otestuj se!</button></div>
-  </div>
-</div>
-
+      <div class="content-box"><h3>&#128214; O cem to je?</h3><p>Komedie ve starovekom Recku. Muz si pronajme osla. V horku si sedne do stinu osla. Vznikne spor: pronajal si stin taky? Z maleho sporu se stane soudni pripad, pak politicka afera &mdash; cele mesto se rozdeli. Satira na demaogy a lidskou hloupost.</p></div>
+      <div class="content-box"><h3>&#127970; Postavy / klic. body</h3><ul><li>Osvobozene divadlo V+W = legendarni mezivalecne divadlo v Praze</li><li>Satirizovali fasizmus v dobe, kdy Hitler vladl</li><li>Stin osla = maly problem = velky politicky boj</li><li>1938: museli emigrovat do USA pred Hitlerem</li></ul></div>
+      <div class="content-box fw lt"><h3>&#128218; Literarni teorie + dobovy kontext</h3><div class="lt-grid"><div class="lt-item"><strong>Lit. druh/zanr</strong><span>Drama &mdash; satiricka politicka komedie</span></div><div class="lt-item"><strong>Lit. smer</strong><span>Ceska mezivalecna avantgarda, kabaretni divadlo</span></div><div class="lt-item"><strong>Forma</strong><span>Divadelni hra, dialogy, komicke situace, pisne</span></div><div class="lt-item"><strong>Vypravec</strong><span>Neni &mdash; divadlo; V+W hralic sami (Voskovec = Zebrak, Werich = Petr)</span></div><div class="lt-item"><strong>Dobovy kontext</strong><span>30. leta &mdash; Hitler v Nemecku, fasizmus v Evrope. V+W varovali satirou a humorem. Museli emigrovat 1938. Jejich divadlo = unikatni spojeni kabaretu, jazzu, politiky a poezie.</span></div><div class="lt-item"><strong>Dalsi dila autoru</strong><span>Vest Pocket Revue, Balada z hadru, Caesar, Tezka Barbara</span></div></div></div>
+      <div class="content-box fw mb"><h3>&#127891; Co rict u maturity?</h3><ul><li>Voskovec + Werich = Osvobozene divadlo, Praha, 30. leta, satirizovali fasizmus</li><li>Satiricka komedie = humor jako politicka zbran, kritika demagogie</li><li>Dobovy kontext: nastup Hitlera, ohrozeni demokracie &mdash; V+W varovali humorem</li><li>Tema: z malichernosti politici delaji velke konflikty &mdash; manipulace mas</li></ul></div>
+      <div class="content-box qb"><h3>&#128172; Klicova myslenka</h3><p>Spor o stin osla = politici z malichernosti delaji velke konflikty. Lidi presvedci bojovat za veci, ktere jim nic nedaji.</p></div>
+      <div class="content-box rb fw"><h3>&#9733; Zapamatuj si</h3><ul><li>Voskovec + Werich = Osvobozene divadlo, 30. leta</li><li>Satirizovali fasizmus &rarr; museli emigrovat do USA (1938)</li><li>Ze sporu o stin osla &rarr; politicka katastrofa</li><li>Humor jako odpor proti totalite a demagogie</li></ul></div>
+    </div><button class="quiz-btn" onclick="openQ(19)">&#129504; Otestuj se!</button></div>
+  </div></div>
 </div>
 
 <div class="quiz-overlay" id="qo">
@@ -426,79 +405,126 @@ body{font-family:'Nunito',sans-serif;background:linear-gradient(135deg,#1a0533 0
     <div class="quiz-options" id="qopts"></div>
     <div class="quiz-exp" id="qexp"></div>
     <div class="quiz-actions">
-      <button class="quiz-close" onclick="closeQ()">✕ Zavřít</button>
-      <button class="quiz-next" id="qnext" onclick="nextQ()">Další otázka →</button>
+      <button class="quiz-close" onclick="closeQ()">&#10005; Zavrit</button>
+      <button class="quiz-next" id="qnext" onclick="nextQ()">Dalsi otazka &rarr;</button>
     </div>
   </div>
 </div>
-<button class="scroll-top" id="st" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<button class="scroll-top" id="st" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
 
 <script>
-const se=document.getElementById('stars');
-for(let i=0;i<85;i++){const s=document.createElement('div');s.className='star';const z=Math.random()*3+1;s.style.cssText=`width:${z}px;height:${z}px;top:${Math.random()*100}%;left:${Math.random()*100}%;--dur:${2+Math.random()*4}s;--delay:${Math.random()*5}s;--mo:${.4+Math.random()*.6}`;se.appendChild(s);}
+(function(){
+  const c=document.getElementById('sf');
+  const ctx=c.getContext('2d');
+  let W,H,stars=[];
+  function resize(){W=c.width=window.innerWidth;H=c.height=window.innerHeight;}
+  resize();window.addEventListener('resize',resize);
+  for(let i=0;i<220;i++){
+    stars.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.8+0.2,
+      speed:Math.random()*0.15+0.02,opacity:Math.random(),opDir:Math.random()>0.5?1:-1,
+      opSpeed:Math.random()*0.008+0.002,
+      color:Math.random()>0.85?'hsl('+(280+Math.random()*60)+',80%,80%)':
+            Math.random()>0.7?'hsl('+(50+Math.random()*20)+',90%,85%)':'white',
+      drift:Math.random()*0.04-0.02});
+  }
+  let shooters=[];
+  function addShooter(){
+    if(Math.random()<0.008&&shooters.length<3){
+      shooters.push({x:Math.random()*W,y:Math.random()*(H*0.4),
+        vx:Math.random()*4+2,vy:Math.random()*2+1,len:Math.random()*80+40,life:1});
+    }
+  }
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    const grad=ctx.createLinearGradient(0,0,W*0.7,H);
+    grad.addColorStop(0,'#0d0020');grad.addColorStop(0.4,'#180842');grad.addColorStop(1,'#0a001a');
+    ctx.fillStyle=grad;ctx.fillRect(0,0,W,H);
+    stars.forEach(s=>{
+      s.opacity+=s.opSpeed*s.opDir;
+      if(s.opacity>1){s.opacity=1;s.opDir=-1;}if(s.opacity<0.05){s.opacity=0.05;s.opDir=1;}
+      s.x+=s.drift;if(s.x<0)s.x=W;if(s.x>W)s.x=0;
+      ctx.save();ctx.globalAlpha=s.opacity;ctx.fillStyle=s.color;
+      ctx.shadowBlur=s.r>1.2?8:3;ctx.shadowColor=s.color;
+      ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fill();ctx.restore();
+    });
+    addShooter();
+    shooters=shooters.filter(sh=>{
+      sh.x+=sh.vx;sh.y+=sh.vy;sh.life-=0.025;
+      if(sh.life<=0||sh.x>W||sh.y>H)return false;
+      const g2=ctx.createLinearGradient(sh.x-sh.vx*(sh.len/sh.vx),sh.y-sh.vy*(sh.len/sh.vx),sh.x,sh.y);
+      g2.addColorStop(0,'rgba(255,255,255,0)');
+      g2.addColorStop(1,'rgba(255,240,200,'+(sh.life*0.9)+')');
+      ctx.strokeStyle=g2;ctx.lineWidth=1.5;ctx.beginPath();
+      ctx.moveTo(sh.x-sh.vx*(sh.len/sh.vx),sh.y-sh.vy*(sh.len/sh.vx));
+      ctx.lineTo(sh.x,sh.y);ctx.stroke();
+      return true;
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
 
 const TOTAL=20;
 let learned=JSON.parse(localStorage.getItem('vm_l')||'{}');
-
 function upd(){
   const c=Object.values(learned).filter(Boolean).length;
   document.getElementById('pFill').style.width=(c/TOTAL*100)+'%';
-  const e=c===0?'🚀':c<5?'💪':c<10?'🔥':c<15?'⭐':c<20?'🌟':'🏆';
-  document.getElementById('pCount').textContent=c+' z '+TOTAL+' knih zvládnutých '+e;
+  const e=c===0?'&#128640;':c<5?'&#128170;':c<10?'&#128293;':c<15?'&#11088;':c<20?'&#127775;':'&#127942;';
+  document.getElementById('pCount').innerHTML=c+' z '+TOTAL+' knih zvladnutych '+e;
 }
-
 function lrn(e,id){
   e.stopPropagation();
   learned[id]=!learned[id];
   localStorage.setItem('vm_l',JSON.stringify(learned));
   const b=document.getElementById('lb'+id),c=document.getElementById('b'+id);
-  if(learned[id]){b.textContent='✓';b.classList.add('active');c.classList.add('learned');}
-  else{b.textContent='☆';b.classList.remove('active');c.classList.remove('learned');}
+  if(learned[id]){b.textContent='&#10003;';b.classList.add('active');c.classList.add('learned');}
+  else{b.innerHTML='&#9734;';b.classList.remove('active');c.classList.remove('learned');}
   upd();
 }
-
 function tog(id){document.getElementById('b'+id).classList.toggle('open');}
-
-(function init(){for(let i=0;i<TOTAL;i++){if(learned[i]){const b=document.getElementById('lb'+i),c=document.getElementById('b'+i);if(b){b.textContent='✓';b.classList.add('active');}if(c){c.classList.add('learned');}}}upd();})();
-
+(function init(){
+  for(let i=0;i<TOTAL;i++){
+    if(learned[i]){
+      const b=document.getElementById('lb'+i),c=document.getElementById('b'+i);
+      if(b){b.innerHTML='&#10003;';b.classList.add('active');}if(c){c.classList.add('learned');}
+    }
+  }upd();
+})();
 window.addEventListener('scroll',()=>{document.getElementById('st').classList.toggle('visible',window.scrollY>400);});
 
 const QD=[
-  {b:'Sluha dvou pánů',q:'Jak se jmenuje mazaný sluha?',o:['Truffaldino','Harlekýn','Fagin','Figaro'],a:0,e:'Truffaldino slouží dvěma pánům najednou — proto dostane dvojí jídlo i výplatu.'},
-  {b:'Lakomec',q:'Jak se jmenuje lakomý otec?',o:['Figaro','Harpagon','Falstaff','Tartuffe'],a:1,e:'Harpagon — jméno pochází z řeckého „harpax" = ten kdo uchvacuje.'},
-  {b:'Romeo a Julie',q:'Ve kterém italském městě se příběh odehrává?',o:['Řím','Florencie','Verona','Benátky'],a:2,e:'Verona. Montague vs. Capulet — dvě nepřátelské rodiny.'},
-  {b:'Kytice',q:'Co se stane v baladě Polednice?',o:['Matka zavolá polednici a dítě zemře','Vodník unese ženu','Mrtvý ženich táhne nevěstu','Dívka zešílí z lásky'],a:0,e:'Matka v zoufalství zavolá polednici — a ta dítě odnese. Porušení řádu = trest.'},
-  {b:'Oliver Twist',q:'Kdo vede gang dětských kapsářů?',o:['Bill Sikes','Monks','Fagin','Artful Dodger'],a:2,e:'Fagin — starý muž, vychovává děti ke krádeži v Londýně 19. stol.'},
-  {b:'Babička',q:'Jak se jmenuje místo, kde babička žije?',o:['Staré Bělidlo','Nové Město','Ratibořice','Hronov'],a:0,e:'Staré Bělidlo u Ratibořic — skutečné místo, dnes turistická destinace.'},
-  {b:'Noc na Karlštejně',q:'Jaký zákon platí na hradě Karlštejn?',o:['Zákaz zbraní','Ženy nesmí přes noc zůstat','Nikdo nesmí mluvit s králem','Brána se zavírá při západu'],a:1,e:'Karel IV. zakázal ženám nocovat na hradě — ale tři se tam tajně dostanou.'},
-  {b:'My děti ze stanice Zoo',q:'V jakém věku začala Christiane F. brát heroin?',o:['11 let','13 let','15 let','17 let'],a:1,e:'V 13 letech — ukazuje, jak rychle a brzy může drogy zasáhnout kohokoliv.'},
-  {b:'Stařec a moře',q:'Co říká věta „Člověka lze zničit, ale ne porazit"?',o:['Rybaření je nebezpečné','Duch je silnější než výsledek','Moře je krutá','Stáří je slabost'],a:1,e:'Santiago přijde o rybu, ale bojoval do konce. Smysl je v boji samotném.'},
-  {b:'Proměna',q:'V co se Řehoř Samsa promění?',o:['Ve vlka','V rybu','V obrovský brouk','V ptáka'],a:2,e:'Probudí se jako obrovský brouk. Kafka to píše klidně — a to je právě děsivé.'},
-  {b:'Farma zvířat',q:'Která hist. postava odpovídá praseti Napoleonovi?',o:['Hitler','Mussolini','Stalin','Lenin'],a:2,e:'Napoleon = Stalin. Snowball = Trockij (vyhnán). Bajka = ruská revoluce a SSSR.'},
-  {b:'Harry Potter',q:'Co způsobilo, že Harry přežil útok Voldemorta?',o:['Mocné kouzlo','Kouzelná hůlka','Láska jeho matky','Pomoc Brumbála'],a:2,e:'Obět Lily Potterové — její láska vytvořila ochranu. Láska = nejsilnější kouzlo.'},
-  {b:'Maminka',q:'Jakou cenu Seifert dostal jako jediný Čech?',o:['Pulitzerovu','Bookerovu','Nobelovu za literaturu','Cenu Franze Kafky'],a:2,e:'Nobelova cena za literaturu 1984 — jediný Čech, kdo ji kdy dostal.'},
-  {b:'Host do domu',q:'V kolika letech zemřel Jiří Wolker?',o:['19','24','31','38'],a:1,e:'Zemřel ve 24 na tuberkulózu. Zanechal přesto silný odkaz v české poezii.'},
-  {b:'Válka s mloky',q:'Co mloci nakonec udělají?',o:['Slouží lidstvu věrně','Přijmou lidská práva','Zatopí pevniny','Vymřou nemocí'],a:2,e:'Využijí znalosti od lidí a zatopí pevniny. Alegorie: co dnes utlačuješ, zítra tě zničí.'},
-  {b:'R.U.R.',q:'Jaké slovo Čapek vynalezl v tomto díle?',o:['Automat','Robot','Android','Kyborg'],a:1,e:'Slovo ROBOT pochází z češtiny (robota = dřina). Čapek ho použil poprvé zde. Dnes je ve všech jazycích!'},
-  {b:'Smrt krásných srnců',q:'Jak se jmenuje otec v Pavlových povídkách?',o:['Karel','Jiří','Leo','František'],a:2,e:'Otec Leo — Žid, legendární vynalézavý obchodník, vždy vymyslí řešení.'},
-  {b:'Báječná léta pod psa',q:'V jaké době se román odehrává?',o:['Protektorát','Normalizace 70.-80. léta','První republika','Po Sametové revoluci'],a:1,e:'Normalizace = šedá doba po Pražském jaru 1968. Končí Sametovou revolucí 1989.'},
-  {b:'Vyšetřování ztráty třídní knihy',q:'Kdo je Jára Cimrman?',o:['Skutečný vynálezce','Fiktivní český génius','Zakladatel divadla','Postava románu'],a:1,e:'Fiktivní postava! Smoljak a Svěrák ho vymysleli. Nikdy neexistoval — ale choval se jako největší Čech.'},
-  {b:'Osel a stín',q:'O co přesně se vede spor?',o:['O zlato','O dům','O stín osla','O prsten'],a:2,e:'Muž si pronajal osla — ale pronajal si i stín? Z malichernosti se stane politická katastrofa.'}
+  {b:'Sluha dvou panu',q:'Jak se jmenuje mazany sluha a ke kteremu lit. smeru dilo patri?',o:['Truffaldino, klasicismus','Harlekyn, romantismus','Figaro, realismus','Tartuffe, baroko'],a:0,e:'Truffaldino = mazany sluha. Goldoni = italsky klasicismus 18. stol. Pravidlo tri jednot, vychovny zamer.'},
+  {b:'Lakomec',q:'Jaky lit. zanr je Lakomec a co ho definuje?',o:['Tragedie — hrdina zemre','Komedie charakteru — postava = jedna vada','Komedie situaci — zamena osob','Historicka komedie — skutecne udalosti'],a:1,e:'Komedie charakteru = cela postava definovana jedinou vadou. Harpagon = lakomost. Moliere = francouzsky klasicismus, psal pro Ludvika XIV.'},
+  {b:'Romeo a Julie',q:'Ke kteremu lit. smeru Shakespeare patri a jaky je zanr dila?',o:['Klasicismus, komedie','Romantismus, balada','Renesance, tragedie','Baroko, epos'],a:2,e:'Shakespeare = renesance (humanismus, clovek v centru). Romeo a Julie = tragedie — hrdinove zahynou kvuli nenavisti spolecnosti.'},
+  {b:'Kytice',q:'Co je BALADA a jaky je hlavni motiv Kytice?',o:['Roman s happy endem','Lyrickoepicka basan s tragickym koncem a nadprirozenom — poruseni radu = trest','Satiricka komedie — vysmech spolecnosti','Historicky epos — valecne pribehy'],a:1,e:'Balada = lyrickoepicka basan, tragicky konec, nadprirozeno. Erben = cesky romantismus, sbiral folklor. Vzdy: poruseni moralniho radu -> nadprirozeny trest.'},
+  {b:'Oliver Twist',q:'Co je pro Dickense typicke a k jakemu lit. smeru patri?',o:['Romantismus — idealizace prirody','Realismus — socialni kritika, verne zobrazeni chudoby','Klasicismus — pravidlo tri jednot','Modernismus — vnitrni monolog'],a:1,e:'Dickens = anglicky realismus, socialni kritika. Verne zobrazeni Viktorianske Anglie — chudobince, detska prace. Psal na pokracovani v casopisech.'},
+  {b:'Babicka',q:'Co je IDYLA a proc Babicka neni realisticka proza?',o:['Idyla = verny popis venkova jak skutecne byl','Idyla = idealizovany, poeticky obraz — ne objektivni realita; Babicka je vzpominka a sen','Idyla = tragicky pribeh z venkova','Idyla = satiricke zobrazeni'],a:1,e:'Idyla = idealizovany obraz. Nemcova nepsala jak venkov BYL, ale jak ho vzpomibkou VIDELA. Psychologicky utek do idealniho detstvi v dobe osobni krize.'},
+  {b:'Noc na Karlstejne',q:'Ke ktere lit. skupine Vrchlicky patril a co ji charakterizuje?',o:['Ruchovci — narodni tema, folklor','Lumirovci — napojeni na evropskou literaturu, svetovy rozmer','Narodni obrozeni — zachrana cestiny','Poetismus — radost, hravost'],a:1,e:'Vrchlicky = Lumirovci. Lumirovci (Vrchlicky, Zeyer) chteli ceskou literaturu propojit s evropskou — na rozdil od Ruchovcu, kteri zduraznovali narod a folklor.'},
+  {b:'My deti ze stanice Zoo',q:'Jaky je lit. zanr a forma tohoto dila?',o:['Fikcni roman, er-forma','Autobiograficky dokumentarni roman, ich-forma — prima vypoved Christiane','Historicka proza, er-forma','Pohadka, ich-forma'],a:1,e:'Autobiograficky dokumentarni roman = skutecny pribeh zapsan jako novinarsku vypoved. Ich-forma = mluvi sama Christiane. Maximalni autenticita a sok z primosti.'},
+  {b:'Starec a more',q:'Co je teorie ledovce a jak se projevuje ve Starci a mori?',o:['Hemingway psal dlouhe filosoficke pasaze','Minimum slov, ale pod povrchem velka hloubka — malo slov, velky smysl','Vysvetluje kazdy symbol do detailu','Pouziva slozity poeticky jazyk'],a:1,e:'Teorie ledovce = Hemingway pise stroze, kratce — ale pod povrchem je plno smyslu a emoci. Santiago rika malo, ale ctenar citi vse.'},
+  {b:'Promena',q:'Ke kteremu lit. smeru Kafka patri a co je typicke pro jeho styl?',o:['Realismus — verne zobrazeni skutecnosti','Expresionismus/absurdno — vecny klidny styl + desive udalosti, odcizeni cloveka','Romantismus — priroda a city','Klasicismus — rozum a rad'],a:1,e:'Kafka = expresionismus, absurdno. Typicky Kafkuv rukopis: desive udalosti popsane vecne a klidne jako by byly normalni. Tema: odcizeni, ztrata identity v systemu.'},
+  {b:'Farma zvirat',q:'Co je ALEGORIE a na co je Farma zvirat alegorici?',o:['Alegorie = prime vypraveni o politice','Alegorie = pribeh kde postavy symbolizuji neco jineho; Farma = ruska revoluce a stalinsky SSSR','Alegorie = pohadka pro deti','Alegorie = historicky roman o skutecnych udalostech'],a:1,e:'Alegorie = pribeh, kde vse symbolizuje neco jineho. Napoleon = Stalin, Snowball = Trockij, Boxer = verny lid. Orwell satirizuje stalinismus a zkazu kazde revoluce.'},
+  {b:'Harry Potter',q:'Co je BILDUNGSROMAN a proc Harry Potter k nemu patri?',o:['Bildungsroman = historicky roman o bitvach','Bildungsroman = roman o dospivani hrdiny — Harry roste, uci se, hleda identitu','Bildungsroman = fantasy bez realnych temat','Bildungsroman = milostny roman'],a:1,e:'Bildungsroman = roman o dospivani. Harry prichazi jako sirotek, roste, prekonava prekazky, najde identitu a smysl. Rowling = fantasy + bildungsroman, konec 20. stol.'},
+  {b:'Maminka',q:'Jakou cenu Seifert dostal a ke kteremu lit. smeru patri?',o:['Bookerovu cenu, realismus','Nobelovu cenu za literaturu 1984, poetismus a pozdi lyrika','Pulitzerovu cenu, socialismus','Cenu Franze Kafky, existencialismus'],a:1,e:'Seifert = Nobelova cena 1984, jediny Cech! Patri k poetismu (mezivalecna ceska avantgarda). Maminka = sbirka lyricke poezie, vzpominky, intimni svet.'},
+  {b:'Host do domu',q:'K jakemu lit. smeru Wolker patril a co je pro jeho styl typicke?',o:['Realismus — verny popis delnického zivota','Proletarske umeni — solidarita s delniky, personifikace veci, veci maji dusi','Romantismus — priroda a milostna lyrika','Poetismus — radost, hravost, bez socialniho tematu'],a:1,e:'Wolker = proletarske umeni, mezivalecna avantgarda. Typicke: veci maji dusi (personifikace), pohled naivniho idealisty. Zemrel ve 24 na TBC.'},
+  {b:'Valka s mloky',q:'Jaka je kompozice Valky s mloky a proc je neobvykla?',o:['Klasicky linearni roman s jednim vypravece','Mozaikova kompozice — novinove utrzky, dokumenty, ruzni vypraveci, imituje realitu','Er-forma s jednim vsvedoucim vypravece po celou dobu','Ich-forma — Capek sam jako vypravec'],a:1,e:'Mozaikova kompozice = novinove zpravy, vedecke zpravy, ruzni vypraveci — jako by to byl skutecny dokumentarni material. Satira na kapitalismus, kolonialismus, fasizmus najednou.'},
+  {b:'R.U.R.',q:'Jake slovo Capek vynalezl a co znamena?',o:['Android — umely clovek z elektroniky','Robot — z cestiny: robota = drina, nucena prace','Cyborg — napul clovek, napul stroj','Humanoid — lidoidni tvor'],a:1,e:'ROBOT pochazi z cestiny (robota = drina, nucena prace). Capek ho pouzil poprve v R.U.R. 1920. Dnes je slovo robot ve vsech svetovych jazycich!'},
+  {b:'Smrt krasnych srncu',q:'Jaka je forma a vypravec Pavlovych povidek?',o:['Er-forma, vsvedouci vypravec, bez humoru','Ich-forma — Ota sam jako dite, autobiograficky pohled, humor i pres holocaust','Er-forma, dokumentarni styl','Ich-forma — otec Leo jako vypravec'],a:1,e:'Ich-forma — vypraveci Ota sam jako dite/syn. Detsky pohled dodava nevinnost a humor i tezkemu tematu holocaustu. Autobiograficka proza.'},
+  {b:'Bajecna leta pod psa',q:'Co je NORMALIZACE a kdy se odehrava roman?',o:['Normalizace = 1918-1938, mezivalecne obdobi','Normalizace = 1969-1989, seda era po Prazsem jaru, predstirani loajality komunismu','Normalizace = 1945-1948, povalecne obdobi','Normalizace = po roce 1989, prechod na demokracii'],a:1,e:'Normalizace = 1969-1989. Po potlaceni Prazskeho jara 1968 museli lide predstirat loajalitu. Viewegh to zobrazi ironicky — smich jako preziti v totalite.'},
+  {b:'Vysetrovani ztrary tridni knihy',q:'Co je ABSURDNI DRAMA a kdo je Jara Cimrman?',o:['Absurdni drama = drama kde zemrou vsichni; Cimrman = skutecny vynalezce 19. stol.','Absurdni drama = humor z nesmyslnosti systemu; Cimrman = fiktivni postava, nikdy neexistoval','Absurdni drama = historicka hra; Cimrman = Smoljak sam','Absurdni drama = komedie se stastnym koncem; Cimrman = Sverakuv pseudonym'],a:1,e:'Absurdni drama = humor z nesmyslnosti systemu, byrokracie, paradoxu (Beckett, Ionesco, Havel). Cimrman = fiktivni postava! Smoljak + Sverak ho vymysleli 1966.'},
+  {b:'Osel a stin',q:'Proc museli Voskovec a Werich emigrovat a co satirizovali?',o:['Emigrovali kvuli komunismu 1948, satirizovali normalizaci','Emigrovali 1938 pred Hitlerem, satirizovali fasizmus a demagogie humorem','Emigrovali kvuli 1. svetove valce','Emigrovali 1968 po Prazsem jaru'],a:1,e:'V+W = Osvobozene divadlo, 30. leta. Satirizovali fasizmus a Hitlera humorem. Museli emigrovat 1938 pred nacisty do USA. Humor jako zbran a odpor proti totalite.'}
 ];
 
 let curQ=0;
 function openQ(id){curQ=id;showQ(id);document.getElementById('qo').classList.add('active');}
 function showQ(idx){
   const q=QD[idx];
-  document.getElementById('qbn').textContent='📖 '+q.b;
+  document.getElementById('qbn').textContent='Kniha: '+q.b;
   document.getElementById('qq').textContent=q.q;
-  const oo=document.getElementById('qopts');
-  oo.innerHTML='';
+  const oo=document.getElementById('qopts');oo.innerHTML='';
   q.o.forEach((opt,i)=>{
-    const b=document.createElement('button');
-    b.className='quiz-option';b.textContent=opt;
-    b.onclick=()=>ans(i,q.a,q.e);
-    oo.appendChild(b);
+    const b=document.createElement('button');b.className='quiz-option';b.textContent=opt;
+    b.onclick=()=>ans(i,q.a,q.e);oo.appendChild(b);
   });
   document.getElementById('qexp').classList.remove('show');
   document.getElementById('qnext').classList.remove('show');
@@ -506,11 +532,9 @@ function showQ(idx){
 function ans(ch,cor,exp){
   document.querySelectorAll('.quiz-option').forEach((o,i)=>{
     o.classList.add('disabled');
-    if(i===cor)o.classList.add('correct');
-    else if(i===ch)o.classList.add('wrong');
+    if(i===cor)o.classList.add('correct');else if(i===ch)o.classList.add('wrong');
   });
-  const e=document.getElementById('qexp');
-  e.textContent='💡 '+exp;e.classList.add('show');
+  const e=document.getElementById('qexp');e.textContent='Spravne: '+exp;e.classList.add('show');
   document.getElementById('qnext').classList.add('show');
 }
 function nextQ(){const n=(curQ+1+Math.floor(Math.random()*4))%QD.length;curQ=n;showQ(n);}
